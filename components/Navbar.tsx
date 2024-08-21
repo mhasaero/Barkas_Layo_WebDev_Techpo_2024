@@ -31,8 +31,6 @@ export default function Navbar() {
         {routes.map((routes) => (
           <li
             key={routes.linkTo}
-            // className={router.asPath == "/#about" ? "active" : ""}
-            key={routes.address}
             className={cn("", {
               "text-primary underline": pathname === routes.address,
             })}
