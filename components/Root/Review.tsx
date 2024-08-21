@@ -1,5 +1,9 @@
 import React from "react";
 
 export default function Review() {
-  return <div>Review</div>;
+  return (
+    <section id="review" className="h-screen">
+      <h1>Review</h1>
+    </section>
+  );
 }
