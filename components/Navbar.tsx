@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className="fixed left-24 right-24 flex items-center justify-between bg-background py-6"
+      className="fixed left-0 right-0 flex items-center justify-between border-b-2 border-primary bg-background px-24 py-6"
     >
       <div className="flex items-center gap-3">
         <Image
