@@ -23,7 +23,7 @@ export default function Navbar() {
           height={100}
           className="size-10"
         />
-        <h1 className="text-4xl text-primary">
+        <h1 className="font-montserrat text-4xl text-primary">
           <strong>Barkas Layo</strong>
         </h1>
       </div>
