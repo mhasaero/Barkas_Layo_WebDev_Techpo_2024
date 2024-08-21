@@ -3,13 +3,12 @@
 import Image from "next/image";
 import { Search, Heart, ShoppingCart } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { routes } from "@/lib/link";
+import { cn } from "@/lib/utils";
 
 export default function Navbar() {
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <nav
@@ -31,8 +30,10 @@ export default function Navbar() {
       <ul className="flex items-center gap-16 text-base">
         {routes.map((routes) => (
           <li
-            key={routes.linkTo}
-            className={router.asPath == "/#about" ? "active" : ""}
+            key={routes.address}
+            className={cn("", {
+              "text-primary underline": pathname === routes.address,
+            })}
           >
             <Link href={routes.address}>{routes.linkTo}</Link>
           </li>
