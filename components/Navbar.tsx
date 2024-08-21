@@ -32,7 +32,7 @@ export default function Navbar() {
         {routes.map((routes) => (
           <li
             key={routes.linkTo}
-            className={router.asPath == "/#about" ? "active" : ""}
+            // className={router.asPath == "/#about" ? "active" : ""}
           >
             <Link href={routes.address}>{routes.linkTo}</Link>
           </li>
