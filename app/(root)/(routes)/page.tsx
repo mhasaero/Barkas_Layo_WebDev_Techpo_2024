@@ -3,6 +3,7 @@ import Home from "@/components/Root/Home";
 import Category from "@/components/Root/Category";
 import Recommendation from "@/components/Root/Recommendation";
 import Review from "@/components/Root/Review";
+import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
@@ -10,9 +11,7 @@ export default function Page() {
       <Navbar />
       <main className="pt-32">
         <Home />
-        <Category />
-        <Recommendation />
-        <Review />
+        <Footer />
       </main>
     </>
   );

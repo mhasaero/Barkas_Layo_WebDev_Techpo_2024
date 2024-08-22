@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className="fixed left-0 right-0 flex items-center justify-between border-b-2 border-primary bg-background px-4 py-4 md:px-12 md:py-6 lg:px-16 xl:px-24"
+      className="fixed left-0 right-0 z-50 flex items-center justify-between border-b-2 border-primary bg-background px-4 py-4 md:px-12 md:py-6 lg:px-16 xl:px-24"
     >
       <div className="flex items-center gap-1 md:gap-3">
         <Image
