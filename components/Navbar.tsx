@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className="fixed left-0 right-0 flex items-center justify-between border-b-2 border-primary bg-background px-24 py-6"
+      className="fixed left-0 right-0 flex items-center justify-between border-b-2 border-primary bg-background px-4 py-4 md:px-12 md:py-6 lg:px-16 xl:px-24"
     >
       <div className="flex items-center gap-3">
         <Image
@@ -21,13 +21,13 @@ export default function Navbar() {
           alt="logo"
           width={100}
           height={100}
-          className="size-10"
+          className="size-8 xl:size-10"
         />
-        <h1 className="font-montserrat text-4xl text-primary">
+        <h1 className="font-montserrat text-2xl text-primary xl:text-4xl">
           <strong>Barkas Layo</strong>
         </h1>
       </div>
-      <ul className="flex items-center gap-16 text-base">
+      <ul className="hidden items-center gap-16 text-sm lg:flex xl:text-base">
         {routes.map((routes) => (
           <li
             key={routes.linkTo}
@@ -39,7 +39,7 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
-      <ul className="flex gap-9 text-base">
+      <ul className="hidden gap-9 text-sm lg:flex xl:text-base">
         <li>
           <Search />
         </li>
