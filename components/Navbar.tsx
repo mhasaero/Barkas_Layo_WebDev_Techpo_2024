@@ -50,13 +50,13 @@ export default function Navbar() {
       <div className="flex justify-between gap-9">
         <ul className="hidden gap-9 md:flex md:text-sm xl:text-base">
           <li>
-            <Search className="size-6 md:size-8" />
+            <Search className="size-6 xl:size-8" />
           </li>
           <li>
-            <Heart className="size-6 md:size-8" />
+            <Heart className="size-6 xl:size-8" />
           </li>
           <li>
-            <ShoppingCart className="size-6 md:size-8" />
+            <ShoppingCart className="size-6 xl:size-8" />
           </li>
         </ul>
         <Sheet>
