@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="relative bottom-0 left-0 right-0 flex flex-col justify-between gap-6 border-t-2 border-border py-12 text-sm md:flex-row md:text-base"
+      className="relative bottom-0 left-0 right-0 mt-40 flex flex-col justify-between gap-6 border-t-2 border-border px-4 py-12 text-sm md:flex-row md:px-12 md:text-base lg:px-16 xl:px-24"
     >
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-1 md:gap-3">

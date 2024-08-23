@@ -77,7 +77,7 @@ const config = {
       },
       fontFamily: {
         poppins: ["var(--font-poppins)"],
-        monsterrat: ["var(--font-montserrat)"],
+        montserrat: ["var(--font-montserrat)"],
       },
     },
   },
