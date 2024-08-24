@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <main className="pt-32">
+      <main className="flex flex-col gap-40">
         <Home />
         <Gallery />
         <Footer />
