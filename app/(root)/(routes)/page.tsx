@@ -12,6 +12,7 @@ export default function Page() {
       <Navbar />
       <main className="flex flex-col gap-40">
         <Home />
+        <Review />
         <Gallery />
         <Footer />
       </main>

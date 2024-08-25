@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import type { FormEvent } from "react";
 import emailjs from "@emailjs/browser";
-import Head from "next/head";
 
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export function FooterMail() {
   const form = useRef(null);
@@ -28,6 +28,7 @@ export function FooterMail() {
         .then(
           (result) => {
             alert(result.text);
+            console.log(result.status);
           },
           (error) => {
             alert(error.text);
@@ -37,9 +38,13 @@ export function FooterMail() {
   };
 
   return (
-    <form onSubmit={sendEmail} className="h-fit space-y-2 md:space-y-6">
-      <label htmlFor="message" className="">
-        Message
+    <form
+      ref={form}
+      onSubmit={sendEmail}
+      className="h-fit space-y-2 md:space-y-6"
+    >
+      <label htmlFor="message" className="font-medium text-muted">
+        Kritik dan Saran
       </label>
       <div className="flex items-end gap-4">
         <textarea
