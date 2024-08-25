@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -40,7 +39,7 @@ export default function Navbar() {
           <li
             key={routes.linkTo}
             className={cn("", {
-              "text-primary underline": pathname === routes.address,
+              "text-primary underline": "" === routes.address,
             })}
           >
             <Link href={routes.address}>{routes.linkTo}</Link>

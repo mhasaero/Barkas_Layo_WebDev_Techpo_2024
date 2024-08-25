@@ -1,65 +1,53 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useRef } from "react";
+import type { FormEvent } from "react";
+import emailjs from "@emailjs/browser";
+import Head from "next/head";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-
-const formSchema = z.object({
-  text: z.string().min(1).max(100),
-});
 
 export function FooterMail() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      text: "",
-    },
-  });
+  const form = useRef(null);
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+  const sendEmail = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID &&
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID &&
+      form.current
+    ) {
+      emailjs
+        .sendForm(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+          form.current,
+          process.env.NEXT_PUBLIC_EMAILJS_USER_ID,
+        )
+        .then(
+          (result) => {
+            alert(result.text);
+          },
+          (error) => {
+            alert(error.text);
+          },
+        );
+    }
+  };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex h-fit items-end gap-3"
-      >
-        <FormField
-          control={form.control}
-          name="text"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="font-weight text-muted">
-                <strong>Kritik dan Saran</strong>
-              </FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Tulis pesan anda"
-                  {...field}
-                  className="h-10 rounded-none border-0 border-b-2 border-foreground px-0"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+    <form onSubmit={sendEmail} className="h-fit space-y-2 md:space-y-6">
+      <label htmlFor="message" className="">
+        Message
+      </label>
+      <div className="flex items-end gap-4">
+        <textarea
+          rows={8}
+          id="message"
+          name="message"
+          className="h-10 border-0 border-b-2 border-foreground bg-background px-0 focus-visible:outline-none"
+          required
         />
         <Button
           type="submit"
@@ -72,7 +60,7 @@ export function FooterMail() {
             Kirim
           </strong>
         </Button>
-      </form>
-    </Form>
+      </div>
+    </form>
   );
 }
