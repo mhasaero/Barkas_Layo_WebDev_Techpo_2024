@@ -5,26 +5,27 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
           "bg-primary text-background border-2 border-primary w-fit hover:text-primary hover:bg-background hover:border-primary font-medium",
         basic: "bg-background border-foreground border-b-2 text-foreground ",
-        alt: "bg-transparent border-primary border-2 text-primary hover:text-background hover:bg-primary",
+        alt: "bg-transparent border-primary border-2 text-primary hover:text-background hover:bg-primary text-sm",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "text-primary bg-background border-[1.5px] border-primary text-xs hover:bg-primary hover:text-background hover:border-primary",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        carousel: "text-[#D8D8D8] active:text-[#0051BA] active:border-4 border-[#0051BA] border-",
       },
       size: {
         default: "px-3 py-4 rounded-xl",
-        basic: "px-3 py-2 rounded-none",
+        basic: "px-12 py-3 rounded-md",
         sm: "h-9 rounded-xl px-3",
         lg: "h-11 rounded-xl px-8",
         icon: "h-10 w-10",
