@@ -104,28 +104,28 @@ export default function Category() {
               </CarouselItem>
               <CarouselItem className="lg:basis-1/3">
                 <div className="group relative h-[50vh] w-full cursor-pointer overflow-hidden rounded-xl lg:h-[70vh]">
-                  <div className="h-full w-full bg-[url('/images/shoe-category.png')] bg-cover bg-center duration-700 ease-in-out group-hover:rotate-2 group-hover:scale-125"></div>
+                  <div className="h-full w-full bg-[url('/images/bag-category.png')] bg-cover bg-center duration-700 ease-in-out group-hover:rotate-2 group-hover:scale-125"></div>
                   <div className="absolute bottom-0 left-0 right-0 top-0 rounded-xl bg-[#0051BA] bg-opacity-35"></div>
                   <span className="absolute bottom-4 left-5 text-2xl font-bold text-background">
-                    Sepatu
+                    Tas
                   </span>
                 </div>
               </CarouselItem>
               <CarouselItem className="lg:basis-1/3">
                 <div className="group relative h-[50vh] w-full cursor-pointer overflow-hidden rounded-xl lg:h-[70vh]">
-                  <div className="h-full w-full bg-[url('/images/shoe-category.png')] bg-cover bg-center duration-700 ease-in-out group-hover:rotate-2 group-hover:scale-125"></div>
+                  <div className="h-full w-full bg-[url('/images/skincare-category.png')] bg-cover bg-center duration-700 ease-in-out group-hover:rotate-2 group-hover:scale-125"></div>
                   <div className="absolute bottom-0 left-0 right-0 top-0 rounded-xl bg-[#0051BA] bg-opacity-35"></div>
                   <span className="absolute bottom-4 left-5 text-2xl font-bold text-background">
-                    Sepatu
+                    Skincare
                   </span>
                 </div>
               </CarouselItem>
               <CarouselItem className="lg:basis-1/3">
                 <div className="group relative h-[50vh] w-full cursor-pointer overflow-hidden rounded-xl lg:h-[70vh]">
-                  <div className="h-full w-full bg-[url('/images/shoe-category.png')] bg-cover bg-center duration-700 ease-in-out group-hover:rotate-2 group-hover:scale-125"></div>
+                  <div className="h-full w-full bg-[url('/images/clothes-category.png')] bg-cover bg-center duration-700 ease-in-out group-hover:rotate-2 group-hover:scale-125"></div>
                   <div className="absolute bottom-0 left-0 right-0 top-0 rounded-xl bg-[#0051BA] bg-opacity-35"></div>
                   <span className="absolute bottom-4 left-5 text-2xl font-bold text-background">
-                    Sepatu
+                    Baju
                   </span>
                 </div>
               </CarouselItem>
