@@ -6,6 +6,7 @@ import Gallery from "@/components/Root/Gallery";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Root/Hero";
 import About from "@/components/Root/About";
+import AdsBanner from "@/components/Root/AdsBanner";
 
 export default function Page() {
   return (
@@ -14,6 +15,7 @@ export default function Page() {
       <main className="flex flex-col gap-40">
         <Hero />
         <Category />
+        <AdsBanner/>
         <About />
         <Review />
         <Gallery />

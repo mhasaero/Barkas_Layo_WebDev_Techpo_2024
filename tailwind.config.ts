@@ -56,6 +56,9 @@ const config = {
         yellow: {
           DEFAULT: "hsl(var(--yellow))",
         },
+        lighterBlue: {
+          DEFAULT: "hsl(var(--blue-lighter))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
