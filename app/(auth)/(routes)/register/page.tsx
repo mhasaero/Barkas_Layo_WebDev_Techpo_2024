@@ -17,9 +17,10 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  no_telp: z.string().min(1).max(50),
+  email: z.string().email(),
+  nama: z.string().min(1).max(50),
+  password: z.string().min(1).max(50),
 });
 
 export default function page() {
@@ -27,7 +28,10 @@ export default function page() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      no_telp: "",
+      email: "",
+      nama: "",
+      password: "",
     },
   });
 
@@ -43,12 +47,16 @@ export default function page() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="username"
+            name="no_telp"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Nomor Telepon</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} className="" />
+                  <Input
+                    placeholder="Masukkan nomor telepon Anda"
+                    {...field}
+                    className=""
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -56,12 +64,16 @@ export default function page() {
           />
           <FormField
             control={form.control}
-            name="username"
+            name="email"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} className="" />
+                  <Input
+                    placeholder="Masukkan Email Anda"
+                    {...field}
+                    className=""
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -69,12 +81,16 @@ export default function page() {
           />
           <FormField
             control={form.control}
-            name="username"
+            name="nama"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Nama Lengkap</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} className="" />
+                  <Input
+                    placeholder="Masukkan Nama Lengkap Anda"
+                    {...field}
+                    className=""
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -82,26 +98,30 @@ export default function page() {
           />
           <FormField
             control={form.control}
-            name="username"
+            name="password"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} className="" />
+                  <Input
+                    placeholder="Masukkan Password Anda"
+                    {...field}
+                    className=""
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <p className="float-right text-muted">Lupa Password ? </p>
+
           <Button type="submit" className="w-full">
             Daftar
           </Button>
-          <Button type="submit" className="w-full" variant={"alt"}>
-            Sudah Punya Akun ?
-          </Button>
         </form>
       </Form>
+      <Button type="submit" className="w-full" variant={"alt"}>
+        Sudah Punya Akun ?
+      </Button>
     </FormCard>
   );
 }

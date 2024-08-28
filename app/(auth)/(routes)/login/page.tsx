@@ -17,9 +17,8 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  email: z.string().email(),
+  password: z.string().min(1).max(50),
 });
 
 export default function page() {
@@ -27,7 +26,8 @@ export default function page() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
+      password: "",
     },
   });
 
@@ -35,7 +35,8 @@ export default function page() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    alert(values.email);
+    alert(values.password);
   }
 
   return (
@@ -44,12 +45,16 @@ export default function page() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="username"
+            name="email"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} className="" />
+                  <Input
+                    placeholder="Masukkan Email Anda"
+                    {...field}
+                    className=""
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -57,12 +62,16 @@ export default function page() {
           />
           <FormField
             control={form.control}
-            name="username"
+            name="password"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} className="" />
+                  <Input
+                    placeholder="Masukkan Password Anda"
+                    {...field}
+                    className=""
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -72,11 +81,11 @@ export default function page() {
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button type="submit" className="w-full" variant={"alt"}>
-            Belum Punya Akun ?
-          </Button>
         </form>
       </Form>
+      <Button type="submit" className="w-full" variant={"alt"}>
+        Belum Punya Akun ?
+      </Button>
     </FormCard>
   );
 }

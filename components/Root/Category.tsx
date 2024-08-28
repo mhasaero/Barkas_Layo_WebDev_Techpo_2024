@@ -41,21 +41,21 @@ export default function Category() {
                 <h3 className="text-4xl font-bold lg:text-2xl">
                   Kategori Pilihan
                 </h3>
-                <hr className="w-28 lg:w-[72px] border-t-2 border-primary" />
+                <hr className="w-28 border-t-2 border-primary lg:w-[72px]" />
               </div>
             </div>
 
             <div className="flex w-full flex-col gap-4 md:flex-row md:justify-between lg:flex-col lg:justify-normal">
               <div className="flex items-center gap-3">
                 <Image
-                  src={"/images/icon-category.png"}
+                  src={"/images/chart.png"}
                   width={50}
                   height={50}
                   alt="icon"
                 />
                 <div className="flex flex-col justify-center text-lg text-muted-foreground lg:text-sm">
                   <span>200+ Produk</span>
-                  <span>Bekas Layak Pakai</span>
+                  <span>Berkas Layak Pakai</span>
                 </div>
               </div>
 
