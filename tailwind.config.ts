@@ -56,6 +56,9 @@ const config = {
         yellow: {
           DEFAULT: "hsl(var(--yellow))",
         },
+        red: {
+          DEFAULT: "hsl(var(--red))",
+        },
         lighterBlue: {
           DEFAULT: "hsl(var(--blue-lighter))",
         },

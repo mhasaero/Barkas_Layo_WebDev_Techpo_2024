@@ -15,7 +15,8 @@ export default function Page() {
       <main className="flex flex-col gap-40">
         <Hero />
         <Category />
-        <AdsBanner/>
+        <Recommendation />
+        <AdsBanner />
         <About />
         <Review />
         <Gallery />

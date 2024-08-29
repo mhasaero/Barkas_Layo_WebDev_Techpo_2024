@@ -11,7 +11,7 @@ export default function Hero() {
               <h3>BARKAS</h3>
               <h3 className="text-yellow">LAYO</h3>
             </div>
-            <h1 className="text-2xl font-bold text-primary md:text-4xl xl:text-5xl">
+            <h1 className="text-3xl font-bold text-primary md:text-4xl xl:text-5xl">
               Temukan Barang Bekas Berkualitas di Sekitarmu!
             </h1>
             <p className="mb-2 text-sm md:text-base font-semibold">
