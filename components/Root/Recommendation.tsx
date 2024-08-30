@@ -38,7 +38,6 @@ export default function Recommendation() {
               id={product.id}
               liked={product.liked}
               onLikedButton={handleLiked}
-              product={product}
             />
           ))}
         </div>

@@ -3,8 +3,8 @@ const products = [
         id: 1,
         src: ["/images/product/meja-product.png"],
         name: "Meja Belajar",
-        shortDesc: "Sepatu Baru",
-        description: "",
+        shortDesc: "Seperti Baru",
+        description: "Sepatu baru dipakai sekali, kualitas bagus",
         price: 150000,
         liked: false
     },
@@ -13,7 +13,7 @@ const products = [
         src: ["/images/product/kaos-uniqlo-product.png"],
         name: "Kaos Uniq*o",
         shortDesc: "jarang Dipakai",
-        description: "",
+        description: "Kaos jarang dipakai (baru 6 bulan). Kualitas masih oke. Jarang dipakai karena tidak suka modelnya",
         price: 70000,
         liked: false
     },
@@ -22,7 +22,7 @@ const products = [
         src: ["/images/product/lemari-plastik-product.png"],
         name: "Lemari Plastik",
         shortDesc: "Seperti Baru",
-        description: "",
+        description: "Lemari sudah 1 tahun namun masih bagus",
         price: 90000,
         liked: false
     },
@@ -31,7 +31,7 @@ const products = [
         src: ["/images/product/kasur-single-product.png"],
         name: "Kasur Single",
         shortDesc: "Seperti Baru",
-        description: "",
+        description: "kasur baru dibeli 6 bulan yang lalu, masih oke di segala sisi seperti baru",
         price: 550000,
         liked: false
     },
@@ -40,7 +40,7 @@ const products = [
         src: ["/images/product/sepatu-hak-product.png"],
         name: "Sepatu Hak",
         shortDesc: "Produk Baru",
-        description: "",
+        description: "Sepatu hak 5cm belum pernah dipakai",
         price: 120000,
         liked: false
     },
@@ -49,7 +49,7 @@ const products = [
         src: ["/images/product/blender-merk-phillips-product.png"],
         name: "Blender Merk Philp",
         shortDesc: "Sering Dipakai",
-        description: "",
+        description: "Blender sudah 2 tahun, masih bisa berfungsi dan kualitas masih bagus",
         price: 270000,
         liked: false
     },
@@ -58,7 +58,7 @@ const products = [
         src: ["/images/product/hanger-product.png"],
         name: "Hanger",
         shortDesc: "Seperti Baru",
-        description: "",
+        description: "baru dipakai selama 2 bulan, kualitas sama seperti baru",
         price: 75000,
         liked: false
     },
@@ -67,7 +67,7 @@ const products = [
         src: ["/images/product/kulkas-mini-product.png"],
         name: "Kulkas Mini",
         shortDesc: "Seperti Baru",
-        description: "",
+        description: "kulkas mini baru dipakai 4 bulan",
         price: 950000,
         liked: false
     },
@@ -85,7 +85,7 @@ const products = [
         src: ["/images/product/rice-cooker-product.png"],
         name: "Rice Cooker",
         shortDesc: "Sering Dipakai",
-        description: "",
+        description: "rice cooker sudah dipakai selama 8 bulan, masih bagus silahkan hubungi saya jika mau",
         price: 150000,
         liked: false
     },
@@ -94,7 +94,7 @@ const products = [
         src: ["/images/product/1-set-piring-product.png"],
         name: "1 Set Piring",
         shortDesc: "Seperti Baru",
-        description: "",
+        description: "Seperti baru karena jarang dipakai, kualitas oke",
         price: 35000,
         liked: false
     },
@@ -103,9 +103,45 @@ const products = [
         src: ["/images/product/mini-speaker-product.png"],
         name: "Mini Speaker",
         shortDesc: "Seperti Baru",
-        description: "",
+        description: "Baru dipakai sekali",
         price: 60000,
         liked: false
+    },
+    {
+        id: 13,
+        src: ["/images/product/algorithm-book-product.png"],
+        name: "Buku Algoritma",
+        shortDesc: "jarang Dipakai",
+        description: "buku dari 2 tahun yang lalu, sudah jarang dipakai",
+        price: 45000,
+        liked: true
+    },
+    {
+        id: 14,
+        src: ["/images/product/sunscreen-product.png"],
+        name: "Skin 1004 Sunscreen",
+        shortDesc: "Seperti Baru",
+        description: "baru 1x pakai",
+        price: 80000,
+        liked: true
+    },
+    {
+        id: 15,
+        src: ["/images/product/rack-product.png"],
+        name: "Rak Makanan",
+        shortDesc: "Seperti Baru",
+        description: "barang sudah dibeli sejak 3 bulan yang lalu namun tidak terpakai",
+        price: 30000,
+        liked: true
+    },
+    {
+        id: 16,
+        src: ["/images/product/corkcicle-product.png"],
+        name: "CORKCICLE-Lilac",
+        shortDesc: "Seperti Baru",
+        description: "baru dipakai 1x, bahan bagus",
+        price: 450000,
+        liked: true
     },
     
 ]

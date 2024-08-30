@@ -164,7 +164,6 @@ export default function page({ params: { slug } }) {
                         id={product.id}
                         liked={product.liked}
                         onLikedButton={handleLiked}
-                        product={product}
                       />
                     ))}
                   </div>
