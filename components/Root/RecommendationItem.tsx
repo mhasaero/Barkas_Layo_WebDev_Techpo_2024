@@ -13,7 +13,6 @@ type props = {
     price?: any;
     liked?: boolean;
     onLikedButton?: any;
-    product: any;
 }
 
 export default function RecommendationItem({id, src, name, shortDesc, price, liked, onLikedButton} : props) {
