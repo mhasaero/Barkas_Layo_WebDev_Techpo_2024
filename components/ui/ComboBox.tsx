@@ -18,13 +18,61 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export function ComboBox({ framework }: ProductListProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger className="text-sm">
+          {value
+            ? framework.find((framework: any) => framework.value === value)
+                ?.label
+            : "Pilih Kategori"}
+        </AccordionTrigger>
+        <AccordionContent>
+          <Command>
+            <CommandList>
+              <CommandEmpty>No framework found.</CommandEmpty>
+              <CommandGroup>
+                {framework.map((framework: any, index: any) => (
+                  <CommandItem
+                    key={framework.value + framework.index}
+                    value={framework.value}
+                    onSelect={(currentValue) => {
+                      setValue(currentValue === value ? "" : currentValue);
+                      setOpen(false);
+                    }}
+                    className="flex gap-4"
+                  >
+                    <p>{framework.label}</p>
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        value === framework.value ? "opacity-100" : "opacity-0",
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+
+{
+  /* <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -67,6 +115,5 @@ export function ComboBox({ framework }: ProductListProps) {
           </CommandList>
         </Command>
       </PopoverContent>
-    </Popover>
-  );
+    </Popover> */
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import FormAddProduct from "@/components/Auth/FormAddProduct";
+import FormAddProduct from "@/components/Dashboard/FormAddProduct";
 
 export default function page() {
   return (
