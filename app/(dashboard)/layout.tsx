@@ -9,7 +9,7 @@ export default function layout({ children }: Props) {
   return (
     <div className="overflow-x-hidden bg-background">
       <Navbar type={false} />
-      <main className="mx-4 mt-32 md:mx-12 lg:mx-16 xl:mx-24">{children}</main>
+      <main className="mx-4 mt-24 md:mt-32 md:mx-12 lg:mx-16 xl:mx-24">{children}</main>
     </div>
   );
 }
