@@ -3,7 +3,7 @@ import { lists } from "@/lib/review";
 
 export default function Review() {
   return (
-    <section id="review" className="mx-4 text-center">
+    <section id="review" className="mx-4 scroll-mt-40 text-center">
       <h3 className="text-xl font-semibold text-muted-foreground">
         Apa Kata Mereka
       </h3>

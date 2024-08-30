@@ -5,7 +5,6 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { ProductListProps, Product } from "@/lib/types/productTypes";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,

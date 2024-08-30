@@ -26,7 +26,7 @@ export default function Navbar({ type }: Props) {
       id="navbar"
       className="fixed left-0 right-0 z-50 flex items-center justify-between border-b-2 border-primary bg-background px-4 py-4 md:px-12 md:py-6 lg:px-16 xl:px-24"
     >
-      <div className="flex items-center gap-1 md:gap-3">
+      <Link href="/" className="flex items-center gap-1 md:gap-3">
         <Image
           src={"/images/logo.png"}
           alt="logo"
@@ -37,13 +37,13 @@ export default function Navbar({ type }: Props) {
         <h1 className="font-montserrat text-lg text-primary md:text-2xl xl:text-4xl">
           <strong>Barkas Layo</strong>
         </h1>
-      </div>
+      </Link>
       {type && (
         <ul className="hidden items-center gap-16 text-sm lg:flex xl:text-base">
           {routes.map((routes) => (
             <li
               key={routes.linkTo}
-              className={cn("", {
+              className={cn("duration-200 hover:text-primary hover:underline", {
                 "text-primary underline": "" === routes.address,
               })}
             >
@@ -56,13 +56,19 @@ export default function Navbar({ type }: Props) {
       <div className="flex justify-between gap-9">
         <ul className="hidden gap-9 md:flex md:text-sm xl:text-base">
           <li>
-            <Search className="size-6 xl:size-8" />
+            <Link href={"/favorites"}>
+              <Search className="size-6 duration-200 hover:text-primary xl:size-8" />
+            </Link>
           </li>
           <li>
-            <Heart className="size-6 xl:size-8" />
+            <Link href={"/favorites"}>
+              <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
+            </Link>
           </li>
           <li>
-            <CircleUser className="size-6 xl:size-8" />
+            <Link href={"/profile"}>
+              <CircleUser className="size-6 duration-200 hover:text-primary xl:size-8" />
+            </Link>
           </li>
         </ul>
         <Sheet>
