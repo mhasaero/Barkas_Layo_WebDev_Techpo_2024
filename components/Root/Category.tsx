@@ -44,7 +44,6 @@ export default function Category() {
                 <hr className="w-28 border-t-2 border-primary lg:w-[72px]" />
               </div>
             </div>
-
             <div className="flex w-full flex-col gap-4 md:flex-row md:justify-between lg:flex-col lg:justify-normal">
               <div className="flex items-center gap-3">
                 <Image
@@ -58,7 +57,6 @@ export default function Category() {
                   <span>Berkas Layak Pakai</span>
                 </div>
               </div>
-
               <Button variant={"secondary"} size={"basic"}>
                 Semua Kategori
               </Button>

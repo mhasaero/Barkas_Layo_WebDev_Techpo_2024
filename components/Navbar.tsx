@@ -26,7 +26,7 @@ export default function Navbar({ type }: Props) {
       id="navbar"
       className="fixed left-0 right-0 z-50 flex items-center justify-between border-b-2 border-primary bg-background px-4 py-4 md:px-12 md:py-6 lg:px-16 xl:px-24"
     >
-      <div className="flex items-center gap-1 md:gap-3">
+      <Link href="/" className="flex items-center gap-1 md:gap-3">
         <Image
           src={"/images/logo.png"}
           alt="logo"
@@ -37,7 +37,7 @@ export default function Navbar({ type }: Props) {
         <h1 className="font-montserrat text-lg text-primary md:text-2xl xl:text-4xl">
           <strong>Barkas Layo</strong>
         </h1>
-      </div>
+      </Link>
       {type && (
         <ul className="hidden items-center gap-16 text-sm lg:flex xl:text-base">
           {routes.map((routes) => (
