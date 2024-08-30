@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FormCard } from "@/components/Auth/FormCard";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -18,11 +18,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 
 const formSchema = z.object({
-  no_telp: z.string().min(1).max(50),
+  phoneNumber: z.string().min(1).max(50),
   email: z.string().email(),
-  nama: z.string().min(1).max(50),
+  displayName: z.string().min(1).max(50),
   password: z.string().min(1).max(50),
 });
 
@@ -33,31 +34,32 @@ export default function page() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      no_telp: "",
+      phoneNumber: "",
       email: "",
-      nama: "",
+      displayName: "",
       password: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    createUserWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        router.push("/");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const user = auth.currentUser;
+      if (user) {
+        await setDoc(doc(db, "users", user.uid), {
+          displayName: values.displayName,
+          phoneNumber: values.phoneNumber,
+          email: values.email,
+        });
+      }
 
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      alert("Successfully Signed Up!");
 
-        console.log(errorMessage);
-        // ..
-      });
+      router.push("/");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   }
   return (
     <FormCard id="daftar" message="Buat akun dan mulai berbelanja!">
@@ -65,7 +67,7 @@ export default function page() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="no_telp"
+            name="phoneNumber"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Nomor Telepon</FormLabel>
@@ -99,7 +101,7 @@ export default function page() {
           />
           <FormField
             control={form.control}
-            name="nama"
+            name="displayName"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="">Nama Lengkap</FormLabel>

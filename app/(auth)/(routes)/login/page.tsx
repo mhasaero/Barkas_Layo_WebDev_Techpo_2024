@@ -97,7 +97,12 @@ export default function page() {
           </Button>
         </form>
       </Form>
-      <Button type="submit" className="w-full" variant={"alt"}>
+      <Button
+        onClick={() => router.push("/register")}
+        type="submit"
+        className="w-full"
+        variant={"alt"}
+      >
         Belum Punya Akun ?
       </Button>
     </FormCard>
