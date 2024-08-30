@@ -9,17 +9,14 @@ type props = {
   shortDesc?: string;
   price?: any;
   liked?: boolean;
-  onLikedButton?: any;
 };
 
-export default function RecommendationItem({
-  id,
+export default function ProductItem({
   src,
   name,
   shortDesc,
   price,
   liked,
-  onLikedButton,
 }: props) {
   function rupiahFormat(price: number) {
     const formatter = new Intl.NumberFormat("id-ID", {
@@ -33,8 +30,8 @@ export default function RecommendationItem({
   return (
     <div className="flex flex-col rounded-xl bg-card">
       <Image
-        width={100}
-        height={100}
+        width={500}
+        height={500}
         src={src}
         alt={name}
         className="h-40 w-full rounded-t-xl bg-cover bg-center md:h-64 lg:h-56 xl:h-64"
@@ -49,7 +46,7 @@ export default function RecommendationItem({
             {rupiahFormat(price)}
           </p>
           <div className="flex flex-row gap-1 md:gap-3">
-            <div className="cursor-pointer" onClick={() => onLikedButton(id)}>
+            <div className="cursor-pointer">
               <Heart
                 className={`h-4 md:h-6 ${liked ? "text-red" : "text-black"}`}
                 fill={`${liked ? "red" : "none"}`}
