@@ -28,16 +28,17 @@ export default function Recommendation() {
           Rekomendasi Untuk Anda
         </h1>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {product.slice(0, slicedItem).map((product) => (
-            <RecommendationItem
+          {product.slice(0, slicedItem).map((product) => ( 
+              <RecommendationItem
               key={product.id}
-              src={product.src}
+              src={product.src[0]}
               name={product.name}
               shortDesc={product.shortDesc}
               price={product.price}
               id={product.id}
               liked={product.liked}
               onLikedButton={handleLiked}
+              product={product}
             />
           ))}
         </div>

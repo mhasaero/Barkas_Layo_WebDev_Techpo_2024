@@ -1,7 +1,7 @@
 const products = [
     {
         id: 1,
-        src: "/images/product/meja-product.png",
+        src: ["/images/product/meja-product.png"],
         name: "Meja Belajar",
         shortDesc: "Sepatu Baru",
         description: "",
@@ -10,7 +10,7 @@ const products = [
     },
     {
         id: 2,
-        src: "/images/product/kaos-uniqlo-product.png",
+        src: ["/images/product/kaos-uniqlo-product.png"],
         name: "Kaos Uniq*o",
         shortDesc: "jarang Dipakai",
         description: "",
@@ -19,7 +19,7 @@ const products = [
     },
     {
         id: 3,
-        src: "/images/product/lemari-plastik-product.png",
+        src: ["/images/product/lemari-plastik-product.png"],
         name: "Lemari Plastik",
         shortDesc: "Seperti Baru",
         description: "",
@@ -28,7 +28,7 @@ const products = [
     },
     {
         id: 4,
-        src: "/images/product/kasur-single-product.png",
+        src: ["/images/product/kasur-single-product.png"],
         name: "Kasur Single",
         shortDesc: "Seperti Baru",
         description: "",
@@ -37,7 +37,7 @@ const products = [
     },
     {
         id: 5,
-        src: "/images/product/sepatu-hak-product.png",
+        src: ["/images/product/sepatu-hak-product.png"],
         name: "Sepatu Hak",
         shortDesc: "Produk Baru",
         description: "",
@@ -46,7 +46,7 @@ const products = [
     },
     {
         id: 6,
-        src: "/images/product/blender-merk-phillips-product.png",
+        src: ["/images/product/blender-merk-phillips-product.png"],
         name: "Blender Merk Philp",
         shortDesc: "Sering Dipakai",
         description: "",
@@ -55,7 +55,7 @@ const products = [
     },
     {
         id: 7,
-        src: "/images/product/hanger-product.png",
+        src: ["/images/product/hanger-product.png"],
         name: "Hanger",
         shortDesc: "Seperti Baru",
         description: "",
@@ -64,7 +64,7 @@ const products = [
     },
     {
         id: 8,
-        src: "/images/product/kulkas-mini-product.png",
+        src: ["/images/product/kulkas-mini-product.png"],
         name: "Kulkas Mini",
         shortDesc: "Seperti Baru",
         description: "",
@@ -73,7 +73,7 @@ const products = [
     },
     {
         id: 9,
-        src: "/images/product/mesin-cuci-mini-product.png",
+        src: ["/images/product/mesin-cuci-mini-product.png", "/images/product/2-mesin-cuci-mini-product.png"],
         name: "Mesin Cuci Mini",
         shortDesc: "Jarang Dipakai",
         description: "Produk seperti baru karena baru 4x pakai. Boleh nego, silakan hubungi nomor saya",
@@ -82,7 +82,7 @@ const products = [
     },
     {
         id: 10,
-        src: "/images/product/rice-cooker-product.png",
+        src: ["/images/product/rice-cooker-product.png"],
         name: "Rice Cooker",
         shortDesc: "Sering Dipakai",
         description: "",
@@ -91,7 +91,7 @@ const products = [
     },
     {
         id: 11,
-        src: "/images/product/1-set-piring-product.png",
+        src: ["/images/product/1-set-piring-product.png"],
         name: "1 Set Piring",
         shortDesc: "Seperti Baru",
         description: "",
@@ -100,7 +100,7 @@ const products = [
     },
     {
         id: 12,
-        src: "/images/product/mini-speaker-product.png",
+        src: ["/images/product/mini-speaker-product.png"],
         name: "Mini Speaker",
         shortDesc: "Seperti Baru",
         description: "",
