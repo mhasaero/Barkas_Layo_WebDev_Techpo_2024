@@ -30,13 +30,13 @@ export function ComboBox({ framework }: ProductListProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between text-muted"
+          className="justify-between px-4 py-2 text-sm text-muted"
         >
           {value
             ? framework.find((framework: any) => framework.value === value)
                 ?.label
             : "Pilih Kategori"}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ml-2 size-8 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0">
