@@ -27,16 +27,25 @@ export default function Footer() {
       <ul className="flex flex-row gap-2 font-medium text-foreground md:gap-6 lg:flex-col">
         <li className="hidden text-muted md:block">Tautan</li>
         {routes.map((routes) => (
-          <li key={routes.linkTo} className="">
+          <li
+            key={routes.linkTo}
+            className="duration-200 hover:text-primary hover:underline"
+          >
             <Link href={routes.address}>{routes.linkTo}</Link>
           </li>
         ))}
       </ul>
       <ul className="flex flex-row gap-2 font-medium text-foreground md:gap-6 lg:flex-col">
         <li className="hidden text-muted md:block">Akun</li>
-        <li>Instagram</li>
-        <li>WhatsApp</li>
-        <li>Tiktok</li>
+        <li className="duration-200 hover:text-primary hover:underline">
+          Instagram
+        </li>
+        <li className="duration-200 hover:text-primary hover:underline">
+          WhatsApp
+        </li>
+        <li className="duration-200 hover:text-primary hover:underline">
+          Tiktok
+        </li>
       </ul>
       <FooterMail />
     </footer>

@@ -32,7 +32,7 @@ export default function Category() {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 
   return (
-    <section id="category" className="h-auto">
+    <section id="category" className="h-auto scroll-mt-40">
       <div className="flex flex-col gap-10 px-4 py-4 md:px-12 md:py-6 lg:flex-row lg:gap-4 lg:px-16 xl:px-24">
         <div className="flex w-full flex-col items-center justify-center lg:h-[70vh] lg:w-1/4">
           <div className="flex w-full flex-col gap-10 md:w-full lg:w-fit lg:gap-4">

@@ -11,7 +11,7 @@ import AdsBanner from "@/components/Root/AdsBanner";
 export default function Page() {
   return (
     <>
-      <Navbar />
+      <Navbar type={true} />
       <main className="flex flex-col gap-40">
         <Hero />
         <Category />

@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 export default function Recommendation() {
   const [product, setProduct] = useState(products);
   const [slicedItem, setSLicedItem] = useState(8);
- 
+
   function handleLiked(id: number) {
     setProduct((e) =>
       e.map((product) =>
@@ -17,12 +17,12 @@ export default function Recommendation() {
     );
   }
 
-  function showMoreItems(){
-    setSLicedItem(slicedItem+4);
+  function showMoreItems() {
+    setSLicedItem(slicedItem + 4);
   }
 
   return (
-    <section id="recommendation">
+    <section id="recommendation" className="scroll-mt-40">
       <div className="flex flex-col justify-center gap-10 px-4 py-4 md:px-12 md:py-6 lg:px-16 xl:px-24">
         <h1 className="text-center text-4xl font-bold">
           Rekomendasi Untuk Anda
@@ -41,9 +41,14 @@ export default function Recommendation() {
             />
           ))}
         </div>
-          <Button variant={"secondary"} size={"basic"} className="w-fit mx-auto" onClick={showMoreItems}>
-            Lihat Lebih Banyak
-          </Button>
+        <Button
+          variant={"secondary"}
+          size={"basic"}
+          className="mx-auto w-fit"
+          onClick={showMoreItems}
+        >
+          Lihat Lebih Banyak
+        </Button>
       </div>
     </section>
   );

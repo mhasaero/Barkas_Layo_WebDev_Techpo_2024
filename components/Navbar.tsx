@@ -43,7 +43,7 @@ export default function Navbar({ type }: Props) {
           {routes.map((routes) => (
             <li
               key={routes.linkTo}
-              className={cn("", {
+              className={cn("duration-200 hover:text-primary hover:underline", {
                 "text-primary underline": "" === routes.address,
               })}
             >
@@ -56,13 +56,19 @@ export default function Navbar({ type }: Props) {
       <div className="flex justify-between gap-9">
         <ul className="hidden gap-9 md:flex md:text-sm xl:text-base">
           <li>
-            <Search className="size-6 xl:size-8" />
+            <Link href={"/favorites"}>
+              <Search className="size-6 duration-200 hover:text-primary xl:size-8" />
+            </Link>
           </li>
           <li>
-            <Heart className="size-6 xl:size-8" />
+            <Link href={"/favorites"}>
+              <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
+            </Link>
           </li>
           <li>
-            <CircleUser className="size-6 xl:size-8" />
+            <Link href={"/profile"}>
+              <CircleUser className="size-6 duration-200 hover:text-primary xl:size-8" />
+            </Link>
           </li>
         </ul>
         <Sheet>
