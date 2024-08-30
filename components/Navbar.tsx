@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Search, Heart, ShoppingCart, Menu } from "lucide-react";
+import { Search, Heart, CircleUser, Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { routes } from "@/lib/link";
@@ -14,7 +14,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-export default function Navbar() {
+type Props = {
+  type?: boolean;
+};
+
+export default function Navbar({ type }: Props) {
   const pathname = usePathname();
 
   return (
@@ -34,18 +38,21 @@ export default function Navbar() {
           <strong>Barkas Layo</strong>
         </h1>
       </div>
-      <ul className="hidden items-center gap-16 text-sm lg:flex xl:text-base">
-        {routes.map((routes) => (
-          <li
-            key={routes.linkTo}
-            className={cn("", {
-              "text-primary underline": "" === routes.address,
-            })}
-          >
-            <Link href={routes.address}>{routes.linkTo}</Link>
-          </li>
-        ))}
-      </ul>
+      {type && (
+        <ul className="hidden items-center gap-16 text-sm lg:flex xl:text-base">
+          {routes.map((routes) => (
+            <li
+              key={routes.linkTo}
+              className={cn("", {
+                "text-primary underline": "" === routes.address,
+              })}
+            >
+              <Link href={routes.address}>{routes.linkTo}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
+
       <div className="flex justify-between gap-9">
         <ul className="hidden gap-9 md:flex md:text-sm xl:text-base">
           <li>
@@ -55,7 +62,7 @@ export default function Navbar() {
             <Heart className="size-6 xl:size-8" />
           </li>
           <li>
-            <ShoppingCart className="size-6 xl:size-8" />
+            <CircleUser className="size-6 xl:size-8" />
           </li>
         </ul>
         <Sheet>

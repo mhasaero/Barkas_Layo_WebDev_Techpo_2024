@@ -4,14 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FormCard } from "@/components/Auth/FormCard";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { signInWithEmail } from "@/lib/network/users/userQueries";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
 import { Button } from "@/components/ui/button";
@@ -40,9 +34,6 @@ export default function page() {
     },
   });
 
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
   const router = useRouter();
 
   // 2. Define a submit handler.
@@ -51,14 +42,13 @@ export default function page() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-
         console.log(user);
+        router.push("/");
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-
         console.log(errorMessage);
       });
   }
