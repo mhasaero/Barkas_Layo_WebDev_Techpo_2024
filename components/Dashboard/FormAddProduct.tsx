@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "../ui/button";
+import React, { useState } from "react";
 
 const kategori = [
   {
@@ -50,40 +51,53 @@ const frekuensi = [
 ];
 
 const formSchema = z.object({
-  nama: z.string().min(1).max(50),
-  harga: z.string().min(1).max(50),
+  name: z.string().min(1).max(50),
+  price: z.string().min(1).max(50),
   nomor: z.string().min(1).max(50),
-  rincian: z.string().min(1).max(50),
-  keterangan: z.string().min(1).max(50),
+  summary: z.string().min(1).max(50),
+  info: z.string().min(1).max(50),
 });
 
 export default function FormAddProduct() {
+  const [category, setCategory] = React.useState();
+  const [frequency, setFrequency] = React.useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nama: "",
-      harga: "",
+      name: "",
+      price: "",
       nomor: "",
-      rincian: "",
-      keterangan: "",
+      summary: "",
     },
   });
 
-  function onSubmit() {
-    console.log("halo");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+    console.log(category, frequency);
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex flex-col gap-4 text-lg font-medium">
-          <label>Kategori</label>
-          <ComboBox framework={kategori} />
-          <label>Frekuensi Pemakaian</label>
-          <ComboBox framework={frekuensi} />
+          <label htmlFor="kategori">Kategori</label>
+          <ComboBox
+            framework={kategori}
+            value={category}
+            setValue={setCategory}
+            id="kategori"
+          />
+          <label htmlFor="frekuensi">Frekuensi</label>
+          <ComboBox
+            framework={frekuensi}
+            value={frequency}
+            setValue={setFrequency}
+            id={frekuensi}
+          />
           <FormField
             control={form.control}
-            name="nama"
+            name="name"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="text-lg">Nama Produk</FormLabel>
@@ -100,7 +114,7 @@ export default function FormAddProduct() {
           />
           <FormField
             control={form.control}
-            name="harga"
+            name="price"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="text-lg">Harga</FormLabel>
@@ -130,7 +144,7 @@ export default function FormAddProduct() {
           />
           <FormField
             control={form.control}
-            name="rincian"
+            name="summary"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="text-lg">
@@ -149,7 +163,7 @@ export default function FormAddProduct() {
           />
           <FormField
             control={form.control}
-            name="keterangan"
+            name="info"
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="text-lg">Keterangan Penjual</FormLabel>

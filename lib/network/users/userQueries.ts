@@ -58,3 +58,34 @@ export const signInWithEmail = async (
     return false;
   }
 };
+
+export const addProduct = async (
+  category: string,
+  frequency: string,
+  name: string,
+  price: string,
+  summary: string,
+  info: string,
+): Promise<boolean> => {
+  try {
+    const user = auth.currentUser;
+
+    if (user) {
+      await setDoc(doc(db, "users", user.uid), {
+        category: category,
+        frequency: frequency,
+        name: name,
+        price: price,
+        summary: summary,
+        info: info,
+      });
+    }
+
+    console.log("Successfully Sent!");
+
+    return true;
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return false;
+  }
+};

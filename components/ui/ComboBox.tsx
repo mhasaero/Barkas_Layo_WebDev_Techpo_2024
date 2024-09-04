@@ -24,12 +24,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export function ComboBox({ framework }: ProductListProps) {
+export function ComboBox({ framework, value, setValue, id }: ProductListProps) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
 
   return (
-    <Accordion type="single" collapsible>
+    <Accordion type="single" collapsible id={id}>
       <AccordionItem value="item-1">
         <AccordionTrigger className="text-sm">
           {value
