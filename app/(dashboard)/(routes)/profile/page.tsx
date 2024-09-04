@@ -14,9 +14,9 @@ import { db } from "@/lib/firebase";
 export default function page() {
   const router = useRouter();
 
-  const [displayName, setDisplayName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [displayName, setDisplayName] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
 
   useEffect(() => {
     const user = onAuthStateChanged(auth, async (user) => {
@@ -24,10 +24,10 @@ export default function page() {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        console.log(user);
+        console.log(user.email);
         const querySnapshot = await getDoc(doc(db, "users", uid));
         setDisplayName(querySnapshot.data()?.displayName);
-        setEmail(querySnapshot.data()?.email);
+        setEmail(user.email);
         setPhoneNumber(querySnapshot.data()?.phoneNumber);
 
         // ...

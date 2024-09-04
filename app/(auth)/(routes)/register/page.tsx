@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import { registerUser } from "@/lib/network/users/userQueries";
 
 const formSchema = z.object({
   phoneNumber: z.string().min(1).max(50),
@@ -43,23 +43,14 @@ export default function page() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      await createUserWithEmailAndPassword(auth, values.email, values.password);
-      const user = auth.currentUser;
-      if (user) {
-        await setDoc(doc(db, "users", user.uid), {
-          displayName: values.displayName,
-          phoneNumber: values.phoneNumber,
-          email: values.email,
-        });
-      }
-
-      alert("Successfully Signed Up!");
-
-      router.push("/");
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    (await registerUser(
+      values.email,
+      values.password,
+      values.displayName,
+      values.phoneNumber,
+    ))
+      ? router.push("/")
+      : alert("lol");
   }
   return (
     <FormCard id="daftar" message="Buat akun dan mulai berbelanja!">

@@ -10,25 +10,26 @@ import {
 } from "firebase/auth";
 
 export const registerUser = async (
-  user: User,
   email: string,
   password: string,
+  displayName: string,
+  phoneNumber: string,
 ): Promise<boolean> => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-    await sendEmailVerification(userCredential.user);
-    const userRef = doc(db, "users", userCredential.user.uid);
-    user.id = userCredential.user.uid;
-    await setDoc(userRef, { ...user });
-    await auth.signOut();
-    console.log("User registered successfully");
+    await createUserWithEmailAndPassword(auth, email, password);
+    const user = auth.currentUser;
+    if (user) {
+      await setDoc(doc(db, "users", user.uid), {
+        displayName: displayName,
+        phoneNumber: phoneNumber,
+      });
+    }
+
+    console.log("Successfully Signed Up!");
+
     return true;
-  } catch (error) {
-    // console.error('Error registering user: ', error);
+  } catch (e) {
+    console.error("Error adding document: ", e);
     return false;
   }
 };
@@ -38,19 +39,17 @@ export const signInWithEmail = async (
   password: string,
 ): Promise<boolean> => {
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-    const user = userCredential.user;
-
-    console.log(user);
-
-    if (!user.emailVerified) {
-      // console.log('Email not verified');
-      return false;
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
 
     // console.log('User signed in and session created successfully:', user.uid);
     return true;

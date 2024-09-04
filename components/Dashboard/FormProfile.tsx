@@ -109,13 +109,13 @@ export function FormProfile({ nama, no_telp, email }: any) {
       </form>
       <div className="w-full pt-8 md:pt-12">
         <Button
-          variant={"secondary"}
+          variant={"destructive"}
           type="submit"
           size={"basic"}
           className="w-full rounded-xl py-3 text-base font-medium md:py-4 md:text-lg"
           onClick={() => onSubmit()}
         >
-          Edit Profil
+          Log Out
         </Button>
       </div>
     </Form>
