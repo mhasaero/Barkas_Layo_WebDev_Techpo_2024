@@ -14,7 +14,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "../ui/button";
-import React, { useState } from "react";
+import React from "react";
+
+import { addProduct } from "@/lib/network/users/userQueries";
+import { useRouter } from "next/navigation";
 
 const kategori = [
   {
@@ -62,6 +65,8 @@ export default function FormAddProduct() {
   const [category, setCategory] = React.useState();
   const [frequency, setFrequency] = React.useState(false);
 
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -69,12 +74,24 @@ export default function FormAddProduct() {
       price: "",
       nomor: "",
       summary: "",
+      info: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     console.log(category, frequency);
+
+    (await addProduct(
+      category,
+      frequency,
+      values.name,
+      values.price,
+      values.summary,
+      values.info,
+    ))
+      ? router.push("list-product")
+      : alert("lol");
   }
 
   return (
@@ -148,11 +165,11 @@ export default function FormAddProduct() {
             render={({ field }) => (
               <FormItem className="">
                 <FormLabel className="text-lg">
-                  Masukkan rincian produk
+                  Masukkan Rincian Produk
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="08xx-xxxx-xxxx  "
+                    placeholder="Masukkan Rincian Produk"
                     {...field}
                     className=""
                   />
@@ -169,7 +186,7 @@ export default function FormAddProduct() {
                 <FormLabel className="text-lg">Keterangan Penjual</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Masukkan keterangan penjual"
+                    placeholder="Masukkan Keterangan Penjual"
                     {...field}
                     className=""
                   />

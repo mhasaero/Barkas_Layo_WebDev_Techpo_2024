@@ -1,8 +1,13 @@
 // lib/network/users/userQueries.ts
-
-import { doc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { auth, db } from "../../firebase";
-import { User } from "@/lib/types/userTypes";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -60,8 +65,8 @@ export const signInWithEmail = async (
 };
 
 export const addProduct = async (
-  category: string,
-  frequency: string,
+  category: any,
+  frequency: any,
   name: string,
   price: string,
   summary: string,
@@ -71,13 +76,14 @@ export const addProduct = async (
     const user = auth.currentUser;
 
     if (user) {
-      await setDoc(doc(db, "users", user.uid), {
+      await setDoc(doc(db, "products", name + user.uid), {
         category: category,
         frequency: frequency,
         name: name,
         price: price,
         summary: summary,
         info: info,
+        id: user.uid,
       });
     }
 
@@ -89,3 +95,21 @@ export const addProduct = async (
     return false;
   }
 };
+
+const list: any[] = [];
+
+export const getProducts = async () => {
+  const user = auth.currentUser;
+  const col = query(
+    collection(db, "products"),
+    where("id", "==", user ? user.uid : ""),
+  );
+  const querySnapshot = await getDocs(col);
+  querySnapshot.forEach((doc) => {
+    const product = doc.data();
+    list.push(doc.data());
+  });
+  return list;
+};
+
+export { list };
