@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { ProductListProps, Product } from "@/lib/types/productTypes";
+import { Check } from "lucide-react";
+import { ProductListProps } from "@/lib/types/productTypes";
 
 import { cn } from "@/lib/utils";
 import {
@@ -12,11 +12,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Accordion,
   AccordionContent,

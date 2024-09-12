@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, ReactNode } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProductItem from "@/components/Dashboard/ProductItem";
 import { auth } from "@/lib/firebase";
@@ -8,6 +8,7 @@ import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { getProducts, list } from "@/lib/network/users/userQueries";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function page() {
   const [lists, setLists] = useState<any[]>([]);
@@ -29,9 +30,9 @@ export default function page() {
   //     const querySnapshot = await getDocs(col);
   //     const productsArray: any = [];
   //     querySnapshot.forEach((doc) => {
-  
+
   //       productsArray.push(doc.data());
-  
+
   //       if (productsArray.length === querySnapshot.docs.length) {
   //         setLists(productsArray);
   //       }
@@ -41,7 +42,7 @@ export default function page() {
   //   } finally {
   //   setLoading(false);
   //   }
-    
+
   // };
 
   // useEffect(() => {
@@ -51,12 +52,8 @@ export default function page() {
   //   console.log(lists);
   // }, []);
 
-
-
   const getProducts = () => {
     return new Promise(async (resolve, reject) => {
-      
-
       if (!user) {
         reject("User is not authenticated");
         return;
@@ -67,7 +64,7 @@ export default function page() {
       try {
         const col = query(
           collection(db, "products"),
-          where("id", "==", user.uid)
+          where("id", "==", user.uid),
         );
         const querySnapshot = await getDocs(col);
         const productsArray: any[] = [];
@@ -108,17 +105,27 @@ export default function page() {
     <section id="list-product" className="space-y-10">
       <p className="text-lg font-medium">Produk yang Anda Jual</p>
       <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {loading ? <div>bang loading dulu mff ya</div> : lists.map((doc: any) => (
-          <ProductItem
-            key={doc.id}
-            src={"/images/product/newcomer-keigo.png"}
-            name={doc.id}
-            shortDesc={doc.frequency}
-            price={doc.price}
-            id={doc.id}
-            liked={false}
-          />
-        ))}
+        {loading ? (
+          <div className="flex flex-col space-y-3">
+            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+        ) : (
+          lists.map((doc: any) => (
+            <ProductItem
+              key={doc.id}
+              src={"/images/product/newcomer-keigo.png"}
+              name={doc.name}
+              shortDesc={doc.frequency}
+              price={doc.price}
+              id={doc.id}
+              liked={false}
+            />
+          ))
+        )}
         {/* <ProductItem
           key={1}
           src={"/images/product/newcomer-keigo.png"}
@@ -129,7 +136,9 @@ export default function page() {
           liked={false}
         /> */}
       </div>
-      <Button className="w-full">Tambahkan Produk</Button>
+      <Button className="w-full" onClick={() => router.push("/add-product")}>
+        Tambahkan Produk
+      </Button>
     </section>
   );
 }
