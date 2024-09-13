@@ -60,7 +60,7 @@ export default function page() {
       try {
         const col = query(
           collection(db, "products"),
-          where("id", "==", user.uid),
+          where("sellerId", "==", user.uid),
         );
         const querySnapshot = await getDocs(col);
         const productsArray: any[] = [];
