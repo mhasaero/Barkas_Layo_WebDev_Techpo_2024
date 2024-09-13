@@ -35,11 +35,16 @@ export default function page() {
 
   const router = useRouter();
 
+  function pushProfile() {
+    router.push("/profile");
+    alert("Anda berhasil Login!");
+  }
+
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     (await signInWithEmail(values.email, values.password))
-      ? router.push("/")
-      : alert("lol");
+      ? pushProfile()
+      : alert("Gagal memuat akun!");
   }
 
   return (

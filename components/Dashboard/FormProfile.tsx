@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +25,6 @@ const formSchema = z.object({
 });
 
 export function FormProfile({ nama, no_telp, email }: any) {
-  console.log(nama, no_telp, email);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,10 +34,14 @@ export function FormProfile({ nama, no_telp, email }: any) {
     },
   });
 
+  const router = useRouter();
+
   async function onSubmit() {
     try {
       await auth.signOut();
       console.log("User Signed Out Successfully!");
+      alert("Kamu telah Logout");
+      router.push("/");
     } catch (error: any) {
       console.log(error.code);
     }

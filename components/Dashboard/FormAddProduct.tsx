@@ -84,7 +84,7 @@ export default function FormAddProduct() {
   });
 
   const metadata = {
-    contentType: img?.type
+    contentType: img?.type,
   };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -103,16 +103,12 @@ export default function FormAddProduct() {
     //   : alert("lol");
 
     if (img === null) {
-      alert('No image selected.');
+      alert("No image selected.");
       return;
     }
 
     const storageRef = ref(storage, "images/" + values.name);
-    const uploadTask = uploadBytesResumable(
-      storageRef,
-      img,
-      metadata
-    );
+    const uploadTask = uploadBytesResumable(storageRef, img, metadata);
 
     uploadTask.on(
       "state_changed",
@@ -126,14 +122,6 @@ export default function FormAddProduct() {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          // addDoc(collection(db, "products"), {
-          //   category,
-          //   frequency,
-          //   name: values.name,
-          //   price: values.price,
-          //   summary: values.summary,
-          //   info: values.info,
-
           addProduct(
             category,
             frequency,
@@ -141,14 +129,16 @@ export default function FormAddProduct() {
             values.price,
             values.summary,
             values.info,
-            url
-          ).then(() => {
-            router.push('list-product');
-          }).catch((error) => {
-            console.error('Error adding document:', error.message);
-          });
+            url,
+          )
+            .then(() => {
+              router.push("list-product");
+            })
+            .catch((error) => {
+              console.error("Error adding document:", error.message);
+            });
         });
-      }
+      },
     );
   }
 
@@ -156,21 +146,28 @@ export default function FormAddProduct() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex flex-col gap-4 text-lg font-medium">
-        <div className="mx-auto w-5/6 rounded-2xl border-4 bg-[#E6EEF9] py-8 opacity-75 duration-200 ease-in-out hover:border-dashed hover:border-border hover:opacity-100">
-        <label htmlFor="upload-file" className="space-y-8">
-          <Image
-            src={"/images/uploadImage.png"}
-            width={500}
-            height={500}
-            alt="uploadImage"
-            className="mx-auto size-24"
-          />
-          <p className="text-center text-lg font-semibold text-primary">
-            Unggah Foto Produk Anda
-          </p>
-        </label>
-        <Input id="upload-file" type="file" className="hidden" onChange={(e) => setImg(e.target.files ? e.target.files[0] : null)}/>
-        </div>
+          <div className="mx-auto w-5/6 rounded-2xl border-4 bg-[#E6EEF9] py-8 opacity-75 duration-200 ease-in-out hover:border-dashed hover:border-border hover:opacity-100">
+            <label htmlFor="upload-file" className="space-y-8">
+              <Image
+                src={"/images/uploadImage.png"}
+                width={500}
+                height={500}
+                alt="uploadImage"
+                className="mx-auto size-24"
+              />
+              <p className="text-center text-lg font-semibold text-primary">
+                Unggah Foto Produk Anda
+              </p>
+            </label>
+            <Input
+              id="upload-file"
+              type="file"
+              className="hidden"
+              onChange={(e) =>
+                setImg(e.target.files ? e.target.files[0] : null)
+              }
+            />
+          </div>
           <label htmlFor="kategori">Kategori</label>
           <ComboBox
             framework={kategori}

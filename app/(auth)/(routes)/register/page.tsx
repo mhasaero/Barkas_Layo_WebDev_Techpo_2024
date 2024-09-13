@@ -49,8 +49,8 @@ export default function page() {
       values.displayName,
       values.phoneNumber,
     ))
-      ? router.push("/")
-      : alert("lol");
+      ? router.push("/profile")
+      : alert("Gagal memuat!");
   }
   return (
     <FormCard id="daftar" message="Buat akun dan mulai berbelanja!">
@@ -130,7 +130,12 @@ export default function page() {
           </Button>
         </form>
       </Form>
-      <Button type="submit" className="w-full" variant={"alt"}>
+      <Button
+        type="submit"
+        className="w-full"
+        variant={"alt"}
+        onClick={() => router.push("/login")}
+      >
         Sudah Punya Akun ?
       </Button>
     </FormCard>

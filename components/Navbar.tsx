@@ -13,6 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useAuth } from "@/context/AuthContext";
 
 type Props = {
   type?: boolean;
@@ -20,6 +21,8 @@ type Props = {
 
 export default function Navbar({ type }: Props) {
   const pathname = usePathname();
+
+  const { user } = useAuth();
 
   return (
     <nav
@@ -60,16 +63,32 @@ export default function Navbar({ type }: Props) {
               <Search className="size-6 duration-200 hover:text-primary xl:size-8" />
             </Link>
           </li>
-          <li>
-            <Link href={"/favorites"}>
-              <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
-            </Link>
-          </li>
-          <li>
-            <Link href={"/profile"}>
-              <CircleUser className="size-6 duration-200 hover:text-primary xl:size-8" />
-            </Link>
-          </li>
+          {user ? (
+            <li>
+              <Link href={"/favorites"}>
+                <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link href={"/login"}>
+                <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
+              </Link>
+            </li>
+          )}
+          {user ? (
+            <li>
+              <Link href={"/profile"}>
+                <CircleUser className="size-6 duration-200 hover:text-primary xl:size-8" />
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link href={"/login"}>
+                <CircleUser className="size-6 duration-200 hover:text-primary xl:size-8" />
+              </Link>
+            </li>
+          )}
         </ul>
         <Sheet>
           <SheetTrigger className="lg:hidden">
@@ -85,9 +104,6 @@ export default function Navbar({ type }: Props) {
                   height={100}
                   className="size-8"
                 />
-                <h1 className="font-montserrat text-xl text-primary">
-                  <strong>Barkas Layo</strong>
-                </h1>
               </SheetTitle>
               <ul className="flex flex-col items-start gap-6 text-base">
                 {routes.map((routes) => (
@@ -100,6 +116,37 @@ export default function Navbar({ type }: Props) {
                     <Link href={routes.address}>{routes.linkTo}</Link>
                   </li>
                 ))}
+                <li>
+                  <Link href={"/favorites"}>
+                    <Search className="size-6 duration-200 hover:text-primary xl:size-8" />
+                  </Link>
+                </li>
+                {user ? (
+                  <li>
+                    <Link href={"/favorites"}>
+                      <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link href={"/login"}>
+                      <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
+                    </Link>
+                  </li>
+                )}
+                {user ? (
+                  <li>
+                    <Link href={"/profile"}>
+                      <CircleUser className="size-6 duration-200 hover:text-primary xl:size-8" />
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link href={"/login"}>
+                      <CircleUser className="size-6 duration-200 hover:text-primary xl:size-8" />
+                    </Link>
+                  </li>
+                )}
               </ul>
             </SheetHeader>
           </SheetContent>

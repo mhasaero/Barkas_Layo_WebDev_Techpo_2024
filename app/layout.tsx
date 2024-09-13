@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import AuthContextProvider from "@/context/AuthContext";
+import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,14 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <AuthContextProvider>
-    <html lang="en" className="scroll-smooth">
-      <body className={`${poppins.className} ${montserrat.variable}`}>
-        
-            {children}
- 
-
-      </body>
-    </html>
+      <html lang="en" className="scroll-smooth">
+        <body className={`${poppins.className} ${montserrat.variable}`}>
+          {children}
+          <Toaster />
+        </body>
+      </html>
     </AuthContextProvider>
   );
 }

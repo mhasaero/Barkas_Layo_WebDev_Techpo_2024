@@ -44,22 +44,19 @@ export const signInWithEmail = async (
   password: string,
 ): Promise<boolean> => {
   try {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
-
-    // console.log('User signed in and session created successfully:', user.uid);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    // Signed in
+    const user = userCredential.user;
+    console.log("User signed in:", user);
     return true;
   } catch (error) {
-    // console.error('Error signing in with email:', error);
+    // Handle error
+    const errorMessage = (error as Error).message;
+    console.error("Error signing in with email:", errorMessage);
     return false;
   }
 };
@@ -71,7 +68,7 @@ export const addProduct = async (
   price: string,
   summary: string,
   info: string,
-  img: string
+  img: string,
 ): Promise<boolean> => {
   try {
     const user = auth.currentUser;
@@ -85,7 +82,7 @@ export const addProduct = async (
         summary: summary,
         info: info,
         sellerId: user.uid,
-        img: img
+        img: img,
       });
     }
 

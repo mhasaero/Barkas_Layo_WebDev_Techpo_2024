@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DropDown } from "@/components/ui/dropdown";
+import { DropDown } from "@/components/ui/DropDown";
 
 export default function page() {
   return (
