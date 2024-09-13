@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useEffect, useState, ReactNode } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProductItem from "@/components/Dashboard/ProductItem";
-// import { auth } from "@/lib/firebase";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
-// import { getProducts, list } from "@/lib/network/users/userQueries";
+import { getProducts, list } from "@/lib/network/users/userQueries";
 import { useAuth } from "@/context/AuthContext";
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function page() {
   const { user, userName, uid } = useAuth();
@@ -33,9 +32,9 @@ export default function page() {
   //     const querySnapshot = await getDocs(col);
   //     const productsArray: any = [];
   //     querySnapshot.forEach((doc) => {
-  
+
   //       productsArray.push(doc.data());
-  
+
   //       if (productsArray.length === querySnapshot.docs.length) {
   //         setLists(productsArray);
   //       }
@@ -45,7 +44,7 @@ export default function page() {
   //   } finally {
   //   setLoading(false);
   //   }
-    
+
   // };
 
   // useEffect(() => {
@@ -54,22 +53,14 @@ export default function page() {
   //   })
   //   console.log(lists);
   // }, []);
-
-
-  const getProducts = async () => {
+  
+  const getProducts = () => {
     return new Promise(async (resolve, reject) => {
-
-      if (user) {
-        // alert(user.uid);
-      } else {
-        // reject("User is not authenticated");
-        return;
-      }
 
       try {
         const col = query(
           collection(db, "products"),
-          where("id", "==", user.uid)
+          where("id", "==", user.uid),
         );
         const querySnapshot = await getDocs(col);
         const productsArray: any[] = [];
@@ -111,7 +102,7 @@ export default function page() {
     <section id="list-product" className="space-y-10">
       <p className="text-lg font-medium">Produk yang Anda Jual</p>
       <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {loading ?     
+      {loading ?     
         <>
           <div className="flex flex-col space-y-3">
           <Skeleton className=" h-40 w-full bg-cover bg-center md:h-64 lg:h-56 xl:h-64 rounded-xl" />
@@ -140,18 +131,10 @@ export default function page() {
             liked={false}
           />
         ))}
-        {/* <ProductItem
-          key={1}
-          src={"/images/product/newcomer-keigo.png"}
-          name={"hai"}
-          shortDesc={"hai"}
-          price={100000}
-          id={1}
-          liked={false}
-        /> */}
       </div>
-      <Button className="w-full">Tambahkan Produk</Button>
+      <Button className="w-full" onClick={() => router.push("/add-product")}>
+        Tambahkan Produk
+      </Button>
     </section>
   );
- 
 }
