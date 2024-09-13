@@ -3,17 +3,21 @@
 import React, { useEffect, useState, ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import ProductItem from "@/components/Dashboard/ProductItem";
-import { auth } from "@/lib/firebase";
+// import { auth } from "@/lib/firebase";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
-import { getProducts, list } from "@/lib/network/users/userQueries";
+// import { getProducts, list } from "@/lib/network/users/userQueries";
+import { useAuth } from "@/context/AuthContext";
+import { Skeleton } from "@/components/ui/skeleton"
 
 export default function page() {
+  const { user, userName, uid } = useAuth();
+
   const [lists, setLists] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const user = auth.currentUser;
+  // const user = auth.currentUser;
 
   const router = useRouter();
 
@@ -52,16 +56,14 @@ export default function page() {
   // }, []);
 
 
-
-  const getProducts = () => {
+  const getProducts = async () => {
     return new Promise(async (resolve, reject) => {
-      
 
-      if (!user) {
-        reject("User is not authenticated");
-        return;
+      if (user) {
+        // alert(user.uid);
       } else {
-        alert(user.uid);
+        // reject("User is not authenticated");
+        return;
       }
 
       try {
@@ -88,31 +90,50 @@ export default function page() {
   };
 
   useEffect(() => {
-    if (!user) router.push("/");
+    // if (!user) router.push("/");
     setLoading(true);
     getProducts()
       .then((products: any) => {
-        alert("nais");
+        // alert("nais");
         setLists(products);
         console.log(products);
         setLoading(false);
       })
       .catch((err) => {
         // setError(err);
-        alert(err);
+        // alert(err);
         setLoading(false);
       });
-  }, []);
+  }, [uid]);
+
 
   return (
     <section id="list-product" className="space-y-10">
       <p className="text-lg font-medium">Produk yang Anda Jual</p>
       <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {loading ? <div>bang loading dulu mff ya</div> : lists.map((doc: any) => (
+        {loading ?     
+        <>
+          <div className="flex flex-col space-y-3">
+          <Skeleton className=" h-40 w-full bg-cover bg-center md:h-64 lg:h-56 xl:h-64 rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-4" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        </div>
+        <div className="flex flex-col space-y-3">
+          <Skeleton className=" h-40 w-full bg-cover bg-center md:h-64 lg:h-56 xl:h-64 rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-4" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        </div>
+        </>
+         : 
+        lists.map((doc: any) => (
           <ProductItem
             key={doc.id}
             src={"/images/product/newcomer-keigo.png"}
-            name={doc.id}
+            name={doc.name}
             shortDesc={doc.frequency}
             price={doc.price}
             id={doc.id}
@@ -132,4 +153,5 @@ export default function page() {
       <Button className="w-full">Tambahkan Produk</Button>
     </section>
   );
+ 
 }

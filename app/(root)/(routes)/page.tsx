@@ -7,8 +7,17 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Root/Hero";
 import About from "@/components/Root/About";
 import AdsBanner from "@/components/Root/AdsBanner";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Page() {
+  // const { user } = useAuth;
+
+  // if(!user){
+  //   alert("hiks");
+  // }else {
+  //   alert("hehe");
+  // }
+
   return (
     <>
       <Navbar type={true} />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
+import AuthContextProvider from "@/context/AuthContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,10 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <AuthContextProvider>
     <html lang="en" className="scroll-smooth">
       <body className={`${poppins.className} ${montserrat.variable}`}>
-        {children}
+        
+            {children}
+ 
+
       </body>
     </html>
+    </AuthContextProvider>
   );
 }
