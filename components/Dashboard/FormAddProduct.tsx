@@ -80,6 +80,7 @@ export default function FormAddProduct() {
   const [category, setCategory] = useState();
   const [frequency, setFrequency] = useState(false);
   const [img, setImg] = useState<File | null>(null);
+  const [msg, setMsg] = useState("");
 
   const router = useRouter();
 
@@ -157,27 +158,31 @@ export default function FormAddProduct() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex flex-col gap-4 text-lg font-medium">
-          <div className="mx-auto w-5/6 rounded-2xl border-4 bg-[#E6EEF9] py-8 opacity-75 duration-200 ease-in-out hover:border-dashed hover:border-border hover:opacity-100">
-            <label htmlFor="upload-file" className="space-y-8">
-              <Image
-                src={"/images/uploadImage.png"}
-                width={500}
-                height={500}
-                alt="uploadImage"
-                className="mx-auto size-24"
+          <div className="mx-auto w-5/6">
+            <div className="rounded-2xl border-4 bg-[#E6EEF9] py-8 opacity-75 duration-200 ease-in-out hover:border-dashed hover:border-border hover:opacity-100">
+              <label htmlFor="upload-file" className="space-y-8">
+                <Image
+                  src={"/images/uploadImage.png"}
+                  width={500}
+                  height={500}
+                  alt="uploadImage"
+                  className="mx-auto size-24"
+                />
+                <p className="text-center text-lg font-semibold text-primary">
+                  Unggah Foto Produk Anda
+                </p>
+              </label>
+              <Input
+                id="upload-file"
+                type="file"
+                className="hidden"
+                onChange={(e) => {
+                  setImg(e.target.files ? e.target.files[0] : null);
+                  setMsg("File Chosed");
+                }}
               />
-              <p className="text-center text-lg font-semibold text-primary">
-                Unggah Foto Produk Anda
-              </p>
-            </label>
-            <Input
-              id="upload-file"
-              type="file"
-              className="hidden"
-              onChange={(e) =>
-                setImg(e.target.files ? e.target.files[0] : null)
-              }
-            />
+            </div>
+            <p className="mt-2 text-sm text-primary">{msg}</p>
           </div>
           <label htmlFor="kategori">Kategori</label>
           <ComboBox
