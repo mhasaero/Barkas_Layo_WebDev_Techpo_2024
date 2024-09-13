@@ -15,7 +15,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import React, { useState } from "react";
-
 import { addProduct } from "@/lib/network/users/userQueries";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -36,23 +35,35 @@ const kategori = [
     value: "elektronik",
     label: "Elektronik",
   },
+  {
+    value: "pakaian",
+    label: "Pakaian",
+  },
+  {
+    value: "aksesoris",
+    label: "Aksesoris",
+  },
+  {
+    value: "skincare",
+    label: "Skincare",
+  },
 ];
 
 const frekuensi = [
   {
-    value: "produk-baru",
+    value: "Produk Baru",
     label: "Produk Baru",
   },
   {
-    value: "seperti-baru",
+    value: "Seperti Baru",
     label: "Seperti Baru",
   },
   {
-    value: "jarang-dipakai",
+    value: "Jarang Dipakai",
     label: "Jarang Dipakai",
   },
   {
-    value: "sering-dipakai",
+    value: "Sering Dipakai",
     label: "Sering Dipakai",
   },
 ];
@@ -61,8 +72,8 @@ const formSchema = z.object({
   name: z.string().min(1).max(50),
   price: z.string().min(1).max(50),
   nomor: z.string().min(1).max(50),
-  summary: z.string().min(1).max(50),
-  info: z.string().min(1).max(50),
+  summary: z.string().min(1).max(250),
+  info: z.string().min(1).max(250),
 });
 
 export default function FormAddProduct() {
