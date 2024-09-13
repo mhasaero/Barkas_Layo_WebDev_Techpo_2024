@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { registerUser } from "@/lib/network/users/userQueries";
+import { PasswordInput } from "@/components/Auth/passwordInput";
 
 const formSchema = z.object({
   phoneNumber: z.string().min(1).max(50),
@@ -114,11 +115,7 @@ export default function page() {
               <FormItem className="">
                 <FormLabel className="">Password</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Masukkan Password Anda"
-                    {...field}
-                    className=""
-                  />
+                  <PasswordInput {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
