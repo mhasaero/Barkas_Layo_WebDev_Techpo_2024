@@ -14,10 +14,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "../ui/button";
-import React from "react";
+import React, { useState } from "react";
 
 import { addProduct } from "@/lib/network/users/userQueries";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { db, storage } from "@/lib/firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 const kategori = [
   {
@@ -62,8 +66,9 @@ const formSchema = z.object({
 });
 
 export default function FormAddProduct() {
-  const [category, setCategory] = React.useState();
-  const [frequency, setFrequency] = React.useState(false);
+  const [category, setCategory] = useState();
+  const [frequency, setFrequency] = useState(false);
+  const [img, setImg] = useState<File | null>(null);
 
   const router = useRouter();
 
@@ -78,26 +83,94 @@ export default function FormAddProduct() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    console.log(category, frequency);
+  const metadata = {
+    contentType: img?.type
+  };
 
-    (await addProduct(
-      category,
-      frequency,
-      values.name,
-      values.price,
-      values.summary,
-      values.info,
-    ))
-      ? router.push("list-product")
-      : alert("lol");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // console.log(values);
+    // console.log(category, frequency);
+
+    // (await addProduct(
+    //   category,
+    //   frequency,
+    //   values.name,
+    //   values.price,
+    //   values.summary,
+    //   values.info,
+    // ))
+    //   ? router.push("list-product")
+    //   : alert("lol");
+
+    if (img === null) {
+      alert('No image selected.');
+      return;
+    }
+
+    const storageRef = ref(storage, "images/" + values.name);
+    const uploadTask = uploadBytesResumable(
+      storageRef,
+      img,
+      metadata
+    );
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+      },
+      (error) => {
+        console.log(error.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          // addDoc(collection(db, "products"), {
+          //   category,
+          //   frequency,
+          //   name: values.name,
+          //   price: values.price,
+          //   summary: values.summary,
+          //   info: values.info,
+
+          addProduct(
+            category,
+            frequency,
+            values.name,
+            values.price,
+            values.summary,
+            values.info,
+            url
+          ).then(() => {
+            router.push('list-product');
+          }).catch((error) => {
+            console.error('Error adding document:', error.message);
+          });
+        });
+      }
+    );
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex flex-col gap-4 text-lg font-medium">
+        <div className="mx-auto w-5/6 rounded-2xl border-4 bg-[#E6EEF9] py-8 opacity-75 duration-200 ease-in-out hover:border-dashed hover:border-border hover:opacity-100">
+        <label htmlFor="upload-file" className="space-y-8">
+          <Image
+            src={"/images/uploadImage.png"}
+            width={500}
+            height={500}
+            alt="uploadImage"
+            className="mx-auto size-24"
+          />
+          <p className="text-center text-lg font-semibold text-primary">
+            Unggah Foto Produk Anda
+          </p>
+        </label>
+        <Input id="upload-file" type="file" className="hidden" onChange={(e) => setImg(e.target.files ? e.target.files[0] : null)}/>
+        </div>
           <label htmlFor="kategori">Kategori</label>
           <ComboBox
             framework={kategori}

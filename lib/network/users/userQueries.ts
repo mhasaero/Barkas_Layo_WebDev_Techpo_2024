@@ -71,19 +71,21 @@ export const addProduct = async (
   price: string,
   summary: string,
   info: string,
+  img: string
 ): Promise<boolean> => {
   try {
     const user = auth.currentUser;
 
     if (user) {
-      await setDoc(doc(db, "products", name + user.uid), {
+      await setDoc(doc(collection(db, "products")), {
         category: category,
         frequency: frequency,
         name: name,
         price: price,
         summary: summary,
         info: info,
-        id: user.uid,
+        sellerId: user.uid,
+        img: img
       });
     }
 

@@ -123,7 +123,7 @@ export default function page() {
         lists.map((doc: any) => (
           <ProductItem
             key={doc.id}
-            src={"/images/product/newcomer-keigo.png"}
+            src={doc.img}
             name={doc.name}
             shortDesc={doc.frequency}
             price={doc.price}
