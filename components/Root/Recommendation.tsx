@@ -36,8 +36,8 @@ export default function Recommendation() {
           Rekomendasi Untuk Anda
         </h1>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {products.slice(0, slicedItem).map((product : any) => ( 
-              <RecommendationItem
+          {products.slice(0, slicedItem).map((product: any) => (
+            <RecommendationItem
               key={product.id}
               src={product.img}
               name={product.name}
@@ -57,6 +57,9 @@ export default function Recommendation() {
         >
           Lihat Lebih Banyak
         </Button>
+        <h1 className="text-center text-4xl font-bold">
+          Anda Mungkin Tertarik Juga Dengan
+        </h1>
       </div>
     </section>
   );
