@@ -5,9 +5,21 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { getUserProducts } from "@/lib/network/users/userQueries";
+import { useEffect, useState } from "react";
 
 export default function page() {
   const router = useRouter();
+  const { user, uid } = useAuth();
+  const [lists, setLists] = useState<any[]>([]);
+
+  useEffect(() => {
+    getUserProducts(user)
+      .then((products: any) => {
+        setLists(products);
+      })
+      .catch((err) => {});
+  }, [uid]);
 
   const { userName, userEmail, phoneNumber } = useAuth();
 
@@ -20,7 +32,7 @@ export default function page() {
               Produk yang Anda Jual
             </p>
             <span className="text-sm text-muted-foreground md:text-base">
-              ... Produk Aktif
+              {lists.length} Produk Aktif
             </span>
           </div>
           <div className="flex h-fit w-fit items-center justify-center">

@@ -3,46 +3,21 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProductItem from "@/components/Dashboard/ProductItem";
-import { collection, query, getDocs, where } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import { getUserProducts } from "@/lib/network/users/userQueries";
 import { useAuth } from "@/context/AuthContext";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function page() {
-  const { user, uid } = useAuth();
-
   const [lists, setLists] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user, uid } = useAuth();
 
   const router = useRouter();
 
-  const getProducts = () => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const col = query(
-          collection(db, "products"),
-          where("sellerId", "==", user.uid),
-        );
-        const querySnapshot = await getDocs(col);
-        const productsArray: any[] = [];
-
-        querySnapshot.forEach((doc) => {
-          const product = doc.data();
-          product.id = doc.id;
-          productsArray.push({ ...product });
-        });
-
-        resolve(productsArray);
-      } catch (err) {
-        reject(`Error fetching products: ${err}`);
-      }
-    });
-  };
-
   useEffect(() => {
     setLoading(true);
-    getProducts()
+    getUserProducts(user)
       .then((products: any) => {
         setLists(products);
         setLoading(false);

@@ -93,18 +93,47 @@ export const addProduct = async (
 
 const list: any[] = [];
 
-export const getProducts = async () => {
-  const user = auth.currentUser;
-  const col = query(
-    collection(db, "products"),
-    where("id", "==", user ? user.uid : ""),
-  );
-  const querySnapshot = await getDocs(col);
-  querySnapshot.forEach((doc) => {
-    const product = doc.data();
-    list.push(doc.data());
+export const getUserProducts = (user: any) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const col = query(
+        collection(db, "products"),
+        where("sellerId", "==", user.uid),
+      );
+      const querySnapshot = await getDocs(col);
+      const productsArray: any[] = [];
+
+      querySnapshot.forEach((doc) => {
+        const product = doc.data();
+        product.id = doc.id;
+        productsArray.push({ ...product });
+      });
+
+      resolve(productsArray);
+    } catch (err) {
+      reject(`Error fetching products: ${err}`);
+    }
   });
-  return list;
+};
+
+export const getProducts = (user: any) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const col = query(collection(db, "products"));
+      const querySnapshot = await getDocs(col);
+      const productsArray: any[] = [];
+
+      querySnapshot.forEach((doc) => {
+        const product = doc.data();
+        product.id = doc.id;
+        productsArray.push({ ...product });
+      });
+
+      resolve(productsArray);
+    } catch (err) {
+      reject(`Error fetching products: ${err}`);
+    }
+  });
 };
 
 export { list };
