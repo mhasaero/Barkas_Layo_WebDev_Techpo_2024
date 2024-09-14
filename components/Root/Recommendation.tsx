@@ -57,9 +57,6 @@ export default function Recommendation() {
         >
           Lihat Lebih Banyak
         </Button>
-        <h1 className="text-center text-4xl font-bold">
-          Anda Mungkin Tertarik Juga Dengan
-        </h1>
       </div>
     </section>
   );
