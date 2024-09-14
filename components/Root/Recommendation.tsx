@@ -4,17 +4,20 @@ import { products } from "@/lib/product";
 import React, { useState } from "react";
 import RecommendationItem from "./RecommendationItem";
 import { Button } from "../ui/button";
+import { useProduct } from "@/context/ProductContext";
 
 export default function Recommendation() {
+  const { products } = useProduct();
+
   const [product, setProduct] = useState(products);
   const [slicedItem, setSLicedItem] = useState(8);
 
   function handleLiked(id: number) {
-    setProduct((e) =>
-      e.map((product) =>
-        product.id === id ? { ...product, liked: !product.liked } : product,
-      ),
-    );
+    // setProduct((e : any) =>
+    //   e.map((product : any) =>
+    //     product.id === id ? { ...product, liked: !product.liked } : product,
+    //   ),
+    // );
   }
 
   function showMoreItems() {
@@ -28,15 +31,15 @@ export default function Recommendation() {
           Rekomendasi Untuk Anda
         </h1>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {product.slice(0, slicedItem).map((product) => ( 
+          {products.slice(0, slicedItem).map((product : any) => ( 
               <RecommendationItem
               key={product.id}
-              src={product.src[0]}
+              src={product.img}
               name={product.name}
-              shortDesc={product.shortDesc}
+              shortDesc={product.frequency}
               price={product.price}
               id={product.id}
-              liked={product.liked}
+              liked={false}
               onLikedButton={handleLiked}
             />
           ))}
