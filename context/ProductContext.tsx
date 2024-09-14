@@ -50,13 +50,13 @@ export default function ProductContextProvider({ children } : any) {
   );
   }
 
-  // useEffect(() => {
-
-  //   getSellerName();
-  // }, []);
-
   useEffect(() => {
     getProducts();
+    // getSellerName();
+  }, []);
+
+  useEffect(() => {
+
     if (products.length > 0) {
       getSellerName();
     }
