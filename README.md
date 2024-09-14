@@ -27,7 +27,7 @@ Berikut langkah-langkah untuk mencoba web yang kami buat di komputer lokal Kamu:
    ```bash
    npm install
 
-4. Jalankan aplikasi secara lokal:
+4. Jalankan aplikasi secara lokal
 5. Buka browser Kamu dan akses:
    [http://localhost:3000](http://localhost:3000)
 
