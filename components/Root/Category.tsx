@@ -10,11 +10,14 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Category() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (!api) {
@@ -57,8 +60,12 @@ export default function Category() {
                   <span>Berkas Layak Pakai</span>
                 </div>
               </div>
-              <Button variant={"secondary"} size={"basic"}>
-                Semua Kategori
+              <Button
+                variant={"secondary"}
+                size={"basic"}
+                onClick={() => router.push("/category")}
+              >
+                Lihat Semua Kategori
               </Button>
             </div>
           </div>
