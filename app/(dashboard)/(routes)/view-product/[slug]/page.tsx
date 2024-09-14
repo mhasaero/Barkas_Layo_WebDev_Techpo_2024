@@ -17,7 +17,13 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useParams } from "next/navigation";
 import { useProduct } from "@/context/ProductContext";
 
-export default function page({ params: { slug } }) {
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default function page({ params: { slug } } : PageProps) {
   const { products, sellersName } = useProduct();
 
   // const [ seller, setSeller] = useState([]);

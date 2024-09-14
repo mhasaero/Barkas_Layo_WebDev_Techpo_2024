@@ -1,5 +1,8 @@
+'use client';
+
 import { Heart } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type props = {
@@ -12,12 +15,14 @@ type props = {
 };
 
 export default function ProductItem({
+  id,
   src,
   name,
   shortDesc,
   price,
   liked,
 }: props) {
+
   function rupiahFormat(price: number) {
     const formatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -27,8 +32,10 @@ export default function ProductItem({
     return formatter.format(price);
   }
 
+  const router = useRouter();
+
   return (
-    <div className="flex flex-col rounded-xl bg-card">
+    <div className="flex flex-col rounded-xl bg-card" onClick={() =>  router.push(`/detail-product/${id}`)}>
       <Image
         width={500}
         height={500}
