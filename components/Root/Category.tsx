@@ -65,7 +65,7 @@ export default function Category() {
                 size={"basic"}
                 onClick={() => router.push("/category")}
               >
-                Lihat Semua Kategori
+                Lihat Semua Produk
               </Button>
             </div>
           </div>

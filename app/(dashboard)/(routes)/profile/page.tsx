@@ -20,7 +20,7 @@ export default function page() {
               Produk yang Anda Jual
             </p>
             <span className="text-sm text-muted-foreground md:text-base">
-              2 Produk Aktif
+              ... Produk Aktif
             </span>
           </div>
           <div className="flex h-fit w-fit items-center justify-center">
