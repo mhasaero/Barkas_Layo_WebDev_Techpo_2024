@@ -41,7 +41,7 @@ Berikut contoh cara menggunakan website untuk mencari barang bekas:
 
 ## Built With
 
-* [Next.js](https://nextjs.org/) - Library front-end yang digunakan
+* [Next.js](https://nextjs.org/) - Framework front-end yang digunakan
 * [Tailwind CSS](https://tailwindcss.com/) - Untuk styling komponen UI
 
 ## Authors
