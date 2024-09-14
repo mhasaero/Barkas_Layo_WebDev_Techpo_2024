@@ -4,18 +4,25 @@ import React, { useState } from "react";
 import RecommendationItem from "./RecommendationItem";
 import { Button } from "../ui/button";
 import { useProduct } from "@/context/ProductContext";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Recommendation() {
   const { products } = useProduct();
-
+  const { uid } = useAuth();
+  const router = useRouter();
+;
   const [slicedItem, setSLicedItem] = useState(8);
 
-  function handleLiked(id: number) {
-    // setProduct((e : any) =>
-    //   e.map((product : any) =>
-    //     product.id === id ? { ...product, liked: !product.liked } : product,
-    //   ),
-    // );
+  const { addLikedProduct } = useProduct();
+
+  function handleLiked(product: any) {
+    if (uid !== null) {
+      addLikedProduct(product); 
+  } else {
+    alert("Please Login first!");
+    router.push('/login');
+  }
   }
 
   function showMoreItems() {
@@ -38,7 +45,7 @@ export default function Recommendation() {
               price={product.price}
               id={product.id}
               liked={false}
-              onLikedButton={handleLiked}
+              onLikedButton={() => handleLiked(product)}
             />
           ))}
         </div>

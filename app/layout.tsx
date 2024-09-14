@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import AuthContextProvider from "@/context/AuthContext";
-import { Toaster } from "@/components/ui/toaster";
 import ProductContextProvider from "@/context/ProductContext";
 
 const poppins = Poppins({
@@ -32,7 +31,6 @@ export default function RootLayout({
       <html lang="en" className="scroll-smooth">
         <body className={`${poppins.className} ${montserrat.variable}`}>
           {children}
-          <Toaster />
         </body>
       </html>
       </ProductContextProvider>

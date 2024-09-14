@@ -1,5 +1,6 @@
 'use client'
 
+import { useAuth } from "@/context/AuthContext";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -17,6 +18,7 @@ type props = {
 
 export default function RecommendationItem({id, src, name, shortDesc, price, liked, onLikedButton} : props) {
   const router = useRouter()
+  const { uid } = useAuth();
   
   function rupiahFormat(price: number) {
     const formatter = new Intl.NumberFormat("id-ID", {
@@ -28,14 +30,14 @@ export default function RecommendationItem({id, src, name, shortDesc, price, lik
   }
 
   return (
-    <div className="flex flex-col rounded-xl bg-card" onClick={() => router.push(`/view-product/${id}`)}>
+    <div className="flex flex-col rounded-xl bg-card">
       <Image
         width={100}
         height={100}
         src={src}
         alt={name}
         className="h-40 w-full rounded-t-xl bg-cover bg-center md:h-64 lg:h-56 xl:h-64"
-        
+        onClick={uid !== null ? () => router.push(`/view-product/${id}`) : () => router.push(`/login`) }
       />
       <div className="flex h-20 flex-col justify-between rounded-b-xl border-b-2 border-l-2 border-r-2 border-b-border border-l-border border-r-border px-3 py-2 md:h-24">
         <h3 className="text-sm font-semibold md:text-base">{name}</h3>
