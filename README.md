@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pusat Info Barkas Indralaya (Barkas Layo)
+
+Pusat Info Barkas Indralaya (Barkas Layo) adalah platform e-commerce yang memfasilitasi jual beli barang bekas di sekitar Indralaya, khususnya untuk mahasiswa Universitas Sriwijaya (UNSRI). Website ini bertujuan untuk mempermudah calon pembeli dalam menemukan produk yang mereka butuhkan dengan cepat dan efisien.
 
 ## Getting Started
 
-First, run the development server:
+Instruksi berikut akan membantu Kamu mendapatkan salinan proyek ini yang dapat dijalankan di mesin lokal.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Kamu perlu menginstal beberapa perangkat lunak untuk menjalankan proyek ini.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- [Git](https://git-scm.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Installing
 
-## Learn More
+Berikut langkah-langkah untuk mencoba web yang kami buat di komputer lokal Kamu:
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone repository ini ke dalam direktori lokal Kamu:
+   ```bash
+   git clone https://github.com/your-username/barkas-layo.git
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Masuk ke direktori proyek:
+3. Instal semua dependensi yang dibutuhkan:
+   ```bash
+   npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. Jalankan aplikasi secara lokal
+5. Buka browser Kamu dan akses:
+   [http://localhost:3000](http://localhost:3000)
 
-## Deploy on Vercel
+### Example Demo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Berikut contoh cara menggunakan website untuk mencari barang bekas:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Buka halaman utama website.
+2. Gunakan fitur pencarian untuk menemukan barang yang diinginkan.
+3. Lakukan transaksi dengan penjual melalui informasi kontak yang disediakan.
+
+## Built With
+
+* [Next.js](https://nextjs.org/) - Framework front-end yang digunakan
+* [Tailwind CSS](https://tailwindcss.com/) - Untuk styling komponen UI
+
+## Authors
+
+* Muhammad Ilham Syafik 
+* RA. Nur Afifah W.
+* Syakillah Nachwa
+
+## Acknowledgments
+
+* Terima kasih kepada Tim Apa Adanya yang sudah bekerja keras, gacor kali
+* Inspirasi dari berbagai e-commerce platform
+
+
