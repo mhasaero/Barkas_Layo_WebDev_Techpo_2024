@@ -99,18 +99,6 @@ export default function FormAddProduct() {
   };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-
-    // (await addProduct(
-    //   category,
-    //   frequency,
-    //   values.name,
-    //   values.price,
-    //   values.summary,
-    //   values.info,
-    // ))
-    //   ? router.push("list-product")
-    //   : alert("lol");
-
     if (img === null) {
       alert("No image selected.");
       return;
@@ -124,11 +112,8 @@ export default function FormAddProduct() {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
       },
-      (error) => {
-
-      },
+      (error) => {},
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           addProduct(
@@ -139,11 +124,9 @@ export default function FormAddProduct() {
             values.summary,
             values.info,
             url,
-          )
-            .then(() => {
-              router.push("list-product");
-            })
-
+          ).then(() => {
+            router.push("list-product");
+          });
         });
       },
     );

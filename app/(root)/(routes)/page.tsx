@@ -7,10 +7,8 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Root/Hero";
 import About from "@/components/Root/About";
 import AdsBanner from "@/components/Root/AdsBanner";
-import { useAuth } from "@/context/AuthContext";
 
 export default function Page() {
-
   return (
     <>
       <Navbar type={true} />

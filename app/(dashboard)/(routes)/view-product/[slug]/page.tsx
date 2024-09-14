@@ -21,10 +21,9 @@ interface PageProps {
   };
 }
 
-export default function page({ params: { slug } } : PageProps) {
+export default function page({ params: { slug } }: PageProps) {
   const { products, sellersName } = useProduct();
 
-  // const [ seller, setSeller] = useState([]);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -54,7 +53,7 @@ export default function page({ params: { slug } } : PageProps) {
 
   return (
     <div>
-      {products.map((e : any) => {
+      {products.map((e: any) => {
         if (e.id == slug) {
           return (
             <section id="detail-product" className="flex flex-col gap-24 py-10">
@@ -75,15 +74,15 @@ export default function page({ params: { slug } } : PageProps) {
                       </CarouselItem>
                     ))}
                   </ItemCarousel> */}
-                   <div className="h-[350px] w-full rounded-2xl bg-card">
-                          <Image
-                            src={e.img}
-                            width={500}
-                            height={500}
-                            alt="the-newcomer-keigo-higashino"
-                            className="mx-auto h-full w-3/4 object-cover"
-                          />
-                        </div>
+                  <div className="h-[350px] w-full rounded-2xl bg-card">
+                    <Image
+                      src={e.img}
+                      width={500}
+                      height={500}
+                      alt="the-newcomer-keigo-higashino"
+                      className="mx-auto h-full w-3/4 object-cover"
+                    />
+                  </div>
                   <div className="flex items-center justify-center gap-2">
                     {Array.from({ length: count }).map((_, index) => (
                       <div
@@ -112,7 +111,9 @@ export default function page({ params: { slug } } : PageProps) {
                   </p>
                   <div className="my-4 flex items-center gap-2">
                     <p className="text-sm font-semibold">Rp</p>
-                    <h3 className="text-2xl font-bold xl:text-3xl">{e.price}</h3>
+                    <h3 className="text-2xl font-bold xl:text-3xl">
+                      {e.price}
+                    </h3>
                   </div>
                   <div className="flex items-center gap-6 rounded-2xl border-2 border-border px-4 py-3">
                     <Image
@@ -122,7 +123,9 @@ export default function page({ params: { slug } } : PageProps) {
                       alt="doksli"
                       className="size-12 rounded-full"
                     />
-                    <h3 className="text-xl font-medium">{sellersName[e.sellerId]}</h3>
+                    <h3 className="text-xl font-medium">
+                      {sellersName[e.sellerId]}
+                    </h3>
                   </div>
                   <div className="mt-4 flex">
                     <Button className="flex gap-2 py-4">
@@ -148,9 +151,7 @@ export default function page({ params: { slug } } : PageProps) {
                     <AccordionTrigger className="font-medium">
                       Rincian Produk
                     </AccordionTrigger>
-                    <AccordionContent>
-                      {e.summary}
-                    </AccordionContent>
+                    <AccordionContent>{e.summary}</AccordionContent>
                   </AccordionItem>
                 </Accordion>
                 <div className="flex flex-col gap-3 rounded-2xl border-2 border-border px-4 py-3">
@@ -166,7 +167,7 @@ export default function page({ params: { slug } } : PageProps) {
 
                 <ScrollArea>
                   <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-                    {products.slice(0, 4).map((product : any) => (
+                    {products.slice(0, 4).map((product: any) => (
                       <RecommendationItem
                         key={product.id}
                         src={product.img}

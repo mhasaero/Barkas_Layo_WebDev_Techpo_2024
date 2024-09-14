@@ -10,7 +10,7 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Category() {
   const [api, setApi] = useState<CarouselApi>();

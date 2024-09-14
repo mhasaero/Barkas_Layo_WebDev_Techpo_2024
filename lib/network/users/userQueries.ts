@@ -1,4 +1,3 @@
-// lib/network/users/userQueries.ts
 import {
   doc,
   setDoc,
@@ -10,7 +9,6 @@ import {
 import { auth, db } from "../../firebase";
 import {
   createUserWithEmailAndPassword,
-  sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
@@ -49,12 +47,10 @@ export const signInWithEmail = async (
       email,
       password,
     );
-    // Signed in
     const user = userCredential.user;
     console.log("User signed in:", user);
     return true;
   } catch (error) {
-    // Handle error
     const errorMessage = (error as Error).message;
     console.error("Error signing in with email:", errorMessage);
     return false;
