@@ -6,12 +6,11 @@ import ProductItem from "@/components/Dashboard/ProductItem";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
-import { getProducts, list } from "@/lib/network/users/userQueries";
 import { useAuth } from "@/context/AuthContext";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function page() {
-  const { user, userName, uid } = useAuth();
+  const { user, uid } = useAuth();
 
   const [lists, setLists] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +39,7 @@ export default function page() {
   //       }
   //     });
   //   } catch(error) {
-  //     console.error("Error fetching products:", error);
+
   //   } finally {
   //   setLoading(false);
   //   }
@@ -51,7 +50,6 @@ export default function page() {
   //   getProducts().then(() => {
 
   //   })
-  //   console.log(lists);
   // }, []);
   
   const getProducts = () => {
@@ -71,8 +69,6 @@ export default function page() {
           productsArray.push({ ...product });
         });
 
-        console.log(productsArray);
-
         resolve(productsArray);
       } catch (err) {
         reject(`Error fetching products: ${err}`);
@@ -87,7 +83,6 @@ export default function page() {
       .then((products: any) => {
         // alert("nais");
         setLists(products);
-        console.log(products);
         setLoading(false);
       })
       .catch((err) => {
@@ -120,6 +115,7 @@ export default function page() {
         </div>
         </>
          : 
+         lists.length >= 1 ?
         lists.map((doc: any) => (
           <ProductItem
             key={doc.id}
@@ -130,7 +126,8 @@ export default function page() {
             id={doc.id}
             liked={false}
           />
-        ))}
+        )) : <p className="text-center py-8">Belum ada produk yang dijual</p>
+      }
       </div>
       <Button className="w-full" onClick={() => router.push("/add-product")}>
         Tambahkan Produk

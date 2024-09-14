@@ -1,6 +1,5 @@
 "use client";
 
-import { products } from "@/lib/product";
 import React, { useState } from "react";
 import RecommendationItem from "./RecommendationItem";
 import { Button } from "../ui/button";
@@ -9,7 +8,6 @@ import { useProduct } from "@/context/ProductContext";
 export default function Recommendation() {
   const { products } = useProduct();
 
-  const [product, setProduct] = useState(products);
   const [slicedItem, setSLicedItem] = useState(8);
 
   function handleLiked(id: number) {

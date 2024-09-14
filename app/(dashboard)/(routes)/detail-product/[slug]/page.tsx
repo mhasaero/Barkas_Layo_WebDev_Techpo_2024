@@ -89,11 +89,6 @@ export default function page({ params: { slug }} : PageProps) {
                 <AccordionItem value="item-1">
                   <AccordionTrigger className="">Rincian Produk</AccordionTrigger>
                   <AccordionContent>
-                    {/* Kategori : Buku <br />
-                    Penulis : Keigo Higashino <br />
-                    Halaman : 302 halaman <br />
-                    Penerbit : Gramedia <br />
-                    Lokasi : Gang Buntu Indralaya */}
                     {product.summary}
                   </AccordionContent>
                 </AccordionItem>

@@ -9,9 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ItemCarousel from "@/components/Dashboard/ItemCarousel";
 import { CarouselApi, CarouselItem } from "@/components/ui/carousel";
-import { products } from "@/lib/product";
 import RecommendationItem from "@/components/Root/RecommendationItem";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useParams } from "next/navigation";
@@ -27,7 +25,6 @@ export default function page({ params: { slug } } : PageProps) {
   const { products, sellersName } = useProduct();
 
   // const [ seller, setSeller] = useState([]);
-  const [product, setProduct] = useState(products);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -44,10 +41,6 @@ export default function page({ params: { slug } } : PageProps) {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
-
-  // const getSellerName = () => {
-
-  // }
 
   const productId = useParams<{ slug: string }>();
 
@@ -156,11 +149,6 @@ export default function page({ params: { slug } } : PageProps) {
                       Rincian Produk
                     </AccordionTrigger>
                     <AccordionContent>
-                      {/* Kategori : Buku <br />
-                      Penulis : Keigo Higashino <br />
-                      Halaman : 302 halaman <br />
-                      Penerbit : Gramedia <br />
-                      Lokasi : Gang Buntu Indralaya */}
                       {e.summary}
                     </AccordionContent>
                   </AccordionItem>

@@ -5,7 +5,6 @@ import type { FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 export function FooterMail() {
   const form = useRef(null);

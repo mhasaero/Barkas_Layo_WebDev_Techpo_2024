@@ -39,11 +39,9 @@ export function FormProfile({ nama, no_telp, email }: any) {
   async function onSubmit() {
     try {
       await auth.signOut();
-      console.log("User Signed Out Successfully!");
       alert("Kamu telah Logout");
       router.push("/");
     } catch (error: any) {
-      console.log(error.code);
     }
   }
 

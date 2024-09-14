@@ -19,8 +19,7 @@ import { addProduct } from "@/lib/network/users/userQueries";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { db, storage } from "@/lib/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { storage } from "@/lib/firebase";
 
 const kategori = [
   {
@@ -100,8 +99,6 @@ export default function FormAddProduct() {
   };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // console.log(values);
-    // console.log(category, frequency);
 
     // (await addProduct(
     //   category,
@@ -127,10 +124,10 @@ export default function FormAddProduct() {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
+
       },
       (error) => {
-        console.log(error.message);
+
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
@@ -146,9 +143,7 @@ export default function FormAddProduct() {
             .then(() => {
               router.push("list-product");
             })
-            .catch((error) => {
-              console.error("Error adding document:", error.message);
-            });
+
         });
       },
     );
