@@ -1,24 +1,46 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RecommendationItem from "./RecommendationItem";
 import { Button } from "../ui/button";
 import { useProduct } from "@/context/ProductContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 export default function Recommendation() {
-  const { products } = useProduct();
+  const { products, isProductLiked, addLikedProduct } = useProduct();
   const { uid } = useAuth();
   const router = useRouter();
-;
-  const [slicedItem, setSLicedItem] = useState(8);
+  const [ slicedItem, setSLicedItem ] = useState(8);
+  const [ likedProducts, setLikedProducts ] = useState<any>({});
 
-  const { addLikedProduct } = useProduct();
+  useEffect(() => {
+    if (uid) {
+      products.forEach(async (product: any) => {
+        const liked = await isProductLiked(product.id);
+        setLikedProducts((prev: any) => ({
+          ...prev,
+          [product.id]: liked,
+        }));
+      });
 
-  function handleLiked(product: any) {
+    }
+  }, [uid, products])
+
+  async function handleLiked(product: any) {
     if (uid !== null) {
-      addLikedProduct(product); 
+      addLikedProduct(product);
+      setLikedProducts((prev: any) => ({
+        ...prev,
+        [product.id]: !prev[product.id],
+      })); 
+      if(likedProducts[product.id]){
+        await deleteDoc(doc(db, `liked${uid}`, product.id)).then(() => {
+          alert("successfully deleted");
+        })
+      }
   } else {
     alert("Please Login first!");
     router.push('/login');
@@ -44,7 +66,7 @@ export default function Recommendation() {
               shortDesc={product.frequency}
               price={product.price}
               id={product.id}
-              liked={false}
+              liked={likedProducts[product.id]}
               onLikedButton={() => handleLiked(product)}
             />
           ))}

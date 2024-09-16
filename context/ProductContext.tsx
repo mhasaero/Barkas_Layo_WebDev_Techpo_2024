@@ -87,6 +87,13 @@ export default function ProductContextProvider({ children }: any) {
       });
   }
 
+  //check if product liked by user
+  const isProductLiked = async (productId : any) => {
+    const productRef = doc(db, `liked${uid}`, `${productId}`);
+    const docSnap = await getDoc(productRef);
+    return docSnap.exists();
+  }
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -102,7 +109,7 @@ export default function ProductContextProvider({ children }: any) {
     console.log(uid);
   }, [uid]);
 
-  const value = { products, sellersName, addLikedProduct, likedProducts};
+  const value = { products, sellersName, addLikedProduct, likedProducts, isProductLiked };
 
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

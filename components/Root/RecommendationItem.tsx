@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type props = {
     id?: number;
@@ -19,6 +19,11 @@ type props = {
 export default function RecommendationItem({id, src, name, shortDesc, price, liked, onLikedButton} : props) {
   const router = useRouter()
   const { uid } = useAuth();
+  const [ isLiked, setIsLiked ] = useState(liked);
+
+  useEffect(() => {
+    setIsLiked(liked);
+  }, [liked])
   
   function rupiahFormat(price: number) {
     const formatter = new Intl.NumberFormat("id-ID", {
@@ -51,8 +56,8 @@ export default function RecommendationItem({id, src, name, shortDesc, price, lik
           <div className="flex flex-row gap-1 md:gap-3">
             <div className="cursor-pointer" onClick={() => onLikedButton(id)}>
               <Heart
-                className={`h-4 md:h-6 ${liked ? "text-red" : "text-black"}`}
-                fill={`${liked ? "red" : "none"}`}
+                className={`h-4 md:h-6 ${isLiked ? "text-red" : "text-black"}`}
+                fill={`${isLiked ? "red" : "none"}`}
               />
             </div>
 

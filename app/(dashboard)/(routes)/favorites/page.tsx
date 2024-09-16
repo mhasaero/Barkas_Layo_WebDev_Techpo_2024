@@ -14,7 +14,6 @@ export default function page() {
 
   async function handleLiked(id: string) {
     await deleteDoc(doc(db, `liked${uid}`, id)).then(() => {
-      alert("successfully deleted");
     })
   }
 
