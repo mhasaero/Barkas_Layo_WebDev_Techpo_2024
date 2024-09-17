@@ -55,9 +55,8 @@ export function FooterMail() {
         />
         <Button
           type="submit"
-          variant={"basic"}
-          size={"basic"}
-          className="group relative h-fit font-medium"
+          size={"lg"}
+          className="group relative h-fit rounded-none border-b-2 border-foreground bg-transparent font-medium text-foreground"
         >
           <div className="duration-[250ms] absolute bottom-0 left-0 right-0 h-0 bg-foreground transition-all ease-out group-hover:h-full"></div>
           <strong className="relative group-hover:text-background">

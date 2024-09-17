@@ -13,8 +13,8 @@ export default function Recommendation() {
   const { products, isProductLiked, addLikedProduct } = useProduct();
   const { uid } = useAuth();
   const router = useRouter();
-  const [ slicedItem, setSLicedItem ] = useState(8);
-  const [ likedProducts, setLikedProducts ] = useState<any>({});
+  const [slicedItem, setSLicedItem] = useState(8);
+  const [likedProducts, setLikedProducts] = useState<any>({});
 
   useEffect(() => {
     if (uid) {
@@ -25,9 +25,8 @@ export default function Recommendation() {
           [product.id]: liked,
         }));
       });
-
     }
-  }, [uid, products])
+  }, [uid, products]);
 
   async function handleLiked(product: any) {
     if (uid !== null) {
@@ -35,16 +34,16 @@ export default function Recommendation() {
       setLikedProducts((prev: any) => ({
         ...prev,
         [product.id]: !prev[product.id],
-      })); 
-      if(likedProducts[product.id]){
+      }));
+      if (likedProducts[product.id]) {
         await deleteDoc(doc(db, `liked${uid}`, product.id)).then(() => {
           alert("successfully deleted");
-        })
+        });
       }
-  } else {
-    alert("Please Login first!");
-    router.push('/login');
-  }
+    } else {
+      alert("Please Login first!");
+      router.push("/login");
+    }
   }
 
   function showMoreItems() {
@@ -73,7 +72,7 @@ export default function Recommendation() {
         </div>
         <Button
           variant={"secondary"}
-          size={"basic"}
+          size={"lg"}
           className="mx-auto w-fit"
           onClick={showMoreItems}
         >

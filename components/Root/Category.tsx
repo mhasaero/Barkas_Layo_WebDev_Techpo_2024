@@ -62,7 +62,7 @@ export default function Category() {
               </div>
               <Button
                 variant={"secondary"}
-                size={"basic"}
+                size={"lg"}
                 onClick={() => router.push("/category")}
               >
                 Lihat Semua Produk

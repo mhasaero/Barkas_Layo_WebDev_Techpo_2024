@@ -41,8 +41,7 @@ export function FormProfile({ nama, no_telp, email }: any) {
       await auth.signOut();
       alert("Kamu telah Logout");
       router.push("/");
-    } catch (error: any) {
-    }
+    } catch (error: any) {}
   }
 
   return (
@@ -113,7 +112,7 @@ export function FormProfile({ nama, no_telp, email }: any) {
         <Button
           variant={"destructive"}
           type="submit"
-          size={"basic"}
+          size={"lg"}
           className="w-full rounded-xl py-3 text-base font-medium md:py-4 md:text-lg"
           onClick={() => onSubmit()}
         >

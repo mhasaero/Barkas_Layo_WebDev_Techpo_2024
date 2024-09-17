@@ -37,7 +37,7 @@ export default function page() {
           </div>
           <div className="flex h-fit w-fit items-center justify-center">
             <Button
-              size={"basic"}
+              size={"lg"}
               className="rounded-2xl px-3 py-2 text-xs font-normal md:px-6 md:text-sm"
               onClick={() => router.push("/list-product")}
             >
