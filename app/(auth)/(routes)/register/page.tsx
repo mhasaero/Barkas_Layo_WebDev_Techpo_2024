@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { registerUser } from "@/lib/network/users/userQueries";
 import { PasswordInput } from "@/components/Auth/passwordInput";
 import { toast } from "sonner";
+import { delay } from "@/lib/delay";
 
 const formSchema = z.object({
   phoneNumber: z.string().min(1).max(50),

@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "@/lib/firebase";
+import { toast } from "sonner";
 
 const kategori = [
   {
@@ -100,7 +101,7 @@ export default function FormAddProduct() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (img === null) {
-      alert("No image selected.");
+      toast("No image selected.");
       return;
     }
 

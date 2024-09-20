@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { toast } from "sonner";
 
 export default function Recommendation() {
   const { products, isProductLiked, addLikedProduct } = useProduct();
@@ -37,11 +38,11 @@ export default function Recommendation() {
       }));
       if (likedProducts[product.id]) {
         await deleteDoc(doc(db, `liked${uid}`, product.id)).then(() => {
-          alert("successfully deleted");
+          toast("successfully deleted");
         });
       }
     } else {
-      alert("Please Login first!");
+      toast("Please Login first!");
       router.push("/login");
     }
   }

@@ -14,6 +14,7 @@ import { useProduct } from "@/context/ProductContext";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { toast } from "sonner";
+import { delay } from "@/lib/delay";
 
 interface PageProps {
   params: {
