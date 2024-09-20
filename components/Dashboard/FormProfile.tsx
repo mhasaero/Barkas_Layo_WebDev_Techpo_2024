@@ -17,6 +17,8 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { auth } from "@/lib/firebase";
+import { toast } from "sonner";
+import { delay } from "@/lib/delay";
 
 const formSchema = z.object({
   nama: z.string().min(2).max(50),
@@ -38,8 +40,9 @@ export function FormProfile({ nama, no_telp, email }: any) {
 
   async function onSubmit() {
     try {
+      toast("Kamu telah Logout");
       await auth.signOut();
-      alert("Kamu telah Logout");
+      await delay(500);
       router.push("/");
     } catch (error: any) {}
   }

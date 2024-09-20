@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/Auth/passwordInput";
+import { toast } from "sonner";
+import { delay } from "@/lib/delay";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -37,15 +39,16 @@ export default function page() {
   const router = useRouter();
 
   function pushProfile() {
+    toast("Anda berhasil Login!");
+    delay(500);
     router.push("/profile");
-    alert("Anda berhasil Login!");
   }
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     (await signInWithEmail(values.email, values.password))
       ? pushProfile()
-      : alert("Gagal memuat akun!");
+      : toast("Gagal memuat akun!");
   }
 
   return (

@@ -10,14 +10,23 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import RecommendationItem from "@/components/Root/RecommendationItem";
-import { cn } from "@/lib/utils";
-
-import { useProduct } from "@/context/ProductContext";
-
 import { DropDown } from "@/components/ui/DropDown";
 
+import { cn } from "@/lib/utils";
+import { useProduct } from "@/context/ProductContext";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { toast } from "sonner";
+import { delay } from "@/lib/delay";
+
 export default function CategoryTable() {
-  const { products } = useProduct();
+  const { products, addLikedProduct } = useProduct();
+  const { uid } = useAuth();
+  const [likedProducts, setLikedProducts] = useState<any>({});
+  const router = useRouter();
 
   const rowsTable = 8;
   const [start, setStart] = useState(0);
@@ -51,12 +60,21 @@ export default function CategoryTable() {
     }
   }, [active]);
 
-  function handleLiked(id: number) {
-    // setProduct((e : any) =>
-    //   e.map((product : any) =>
-    //     product.id === id ? { ...product, liked: !product.liked } : product,
-    //   ),
-    // );
+  async function handleLiked(product: any) {
+    if (uid !== null) {
+      addLikedProduct(product);
+      setLikedProducts((prev: any) => ({
+        ...prev,
+        [product.id]: !prev[product.id],
+      }));
+      if (likedProducts[product.id]) {
+        await deleteDoc(doc(db, `liked${uid}`, product.id));
+      }
+    } else {
+      toast("Please Login first!");
+      delay(500);
+      router.push("/login");
+    }
   }
 
   return (
@@ -74,8 +92,8 @@ export default function CategoryTable() {
             shortDesc={product.frequency}
             price={product.price}
             id={product.id}
-            liked={false}
-            onLikedButton={handleLiked}
+            liked={likedProducts[product.id]}
+            onLikedButton={() => handleLiked(product)}
           />
         ))}
       </div>

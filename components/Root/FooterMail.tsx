@@ -5,6 +5,7 @@ import type { FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export function FooterMail() {
   const form = useRef(null);
@@ -26,11 +27,10 @@ export function FooterMail() {
         )
         .then(
           (result) => {
-            alert(result.text);
-            console.log(result.status);
+            toast("Terima kasih telah mengunjungi Barkas Layo !!!");
           },
           (error) => {
-            alert(error.text);
+            toast("Maaf terjadi kesalahan pada sisi server harap hubungi kami");
           },
         );
     }

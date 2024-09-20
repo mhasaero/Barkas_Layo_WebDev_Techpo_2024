@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { registerUser } from "@/lib/network/users/userQueries";
 import { PasswordInput } from "@/components/Auth/passwordInput";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   phoneNumber: z.string().min(1).max(50),
@@ -40,6 +41,12 @@ export default function page() {
     },
   });
 
+  function pushProfile() {
+    toast("Anda berhasil Login!");
+    delay(500);
+    router.push("/profile");
+  }
+
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     (await registerUser(
@@ -48,8 +55,8 @@ export default function page() {
       values.displayName,
       values.phoneNumber,
     ))
-      ? router.push("/profile")
-      : alert("Gagal memuat!");
+      ? pushProfile()
+      : toast("Gagal memuat!");
   }
   return (
     <FormCard id="daftar" message="Buat akun dan mulai berbelanja!">
