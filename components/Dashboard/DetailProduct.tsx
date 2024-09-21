@@ -42,7 +42,11 @@ export default function DetailProduct() {
       {products.map((product: any) => {
         if (product.id == path.slug) {
           return (
-            <section id="detail-product" className="flex flex-col gap-24 py-10">
+            <section
+              id="detail-product"
+              className="flex flex-col gap-24 py-10"
+              key={product.id}
+            >
               <div className="flex flex-col items-center justify-between gap-10 md:flex-row">
                 <div className="rounded-2xl bg-card md:w-1/2">
                   <Image
