@@ -12,8 +12,13 @@ import {
 import { CarouselApi, CarouselItem } from "@/components/ui/carousel";
 import RecommendationItem from "@/components/Root/RecommendationItem";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useProduct } from "@/context/ProductContext";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "sonner";
+import { delay } from "@/lib/delay";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 interface PageProps {
   params: {
@@ -22,9 +27,13 @@ interface PageProps {
 }
 
 export default function ViewProduct() {
-  const { products, sellersName } = useProduct();
+  const { products, sellersName, addLikedProduct } = useProduct();
 
   const path = useParams<{ slug: string }>();
+
+  const { uid } = useAuth();
+  const [likedProducts, setLikedProducts] = useState<any>({});
+  const router = useRouter();
 
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -43,14 +52,21 @@ export default function ViewProduct() {
     });
   }, [api]);
 
-  const productId = useParams<{ slug: string }>();
-
-  function handleLiked(id: number) {
-    // setProduct((e) =>
-    //   e.map((product) =>
-    //     product.id === id ? { ...product, liked: !product.liked } : product,
-    //   ),
-    // );
+  async function handleLiked(product: any) {
+    if (uid !== null) {
+      addLikedProduct(product);
+      setLikedProducts((prev: any) => ({
+        ...prev,
+        [product.id]: !prev[product.id],
+      }));
+      if (likedProducts[product.id]) {
+        await deleteDoc(doc(db, `liked${uid}`, product.id));
+      }
+    } else {
+      toast("Please Login first!");
+      delay(500);
+      router.push("/login");
+    }
   }
 
   return (
@@ -58,24 +74,13 @@ export default function ViewProduct() {
       {products.map((e: any) => {
         if (e.id == path.slug) {
           return (
-            <section id="detail-product" className="flex flex-col gap-24 py-10">
+            <section
+              id="detail-product"
+              className="flex flex-col gap-24 py-10"
+              key={e.id}
+            >
               <div className="flex flex-col items-start justify-between gap-10 md:flex-row">
                 <div className="md:w-1/2">
-                  {/* <ItemCarousel>
-                    {e.src.map((src : any) => (
-                      <CarouselItem>
-                        <div className="h-[350px] w-full rounded-2xl bg-card">
-                          <Image
-                            src={src}
-                            width={500}
-                            height={500}
-                            alt="the-newcomer-keigo-higashino"
-                            className="mx-auto h-full w-3/4 object-cover"
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </ItemCarousel> */}
                   <div className="h-[350px] w-full rounded-2xl bg-card">
                     <Image
                       src={e.img}
