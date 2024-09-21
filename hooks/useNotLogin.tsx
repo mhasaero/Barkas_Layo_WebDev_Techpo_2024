@@ -14,7 +14,6 @@ const useNotLogin = () => {
       delay(500);
       router.push("/login");
     } else {
-      console.log(user);
       return;
     }
   }, [user]);

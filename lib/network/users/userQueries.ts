@@ -28,11 +28,11 @@ export const registerUser = async (
       });
     }
 
-    console.log("Successfully Signed Up!");
+    // console.log("Successfully Signed Up!");
 
     return true;
   } catch (e) {
-    console.error("Error adding document: ", e);
+    // console.error("Error adding document: ", e);
     return false;
   }
 };
@@ -48,11 +48,11 @@ export const signInWithEmail = async (
       password,
     );
     const user = userCredential.user;
-    console.log("User signed in:", user);
+    // console.log("User signed in:", user);
     return true;
   } catch (error) {
     const errorMessage = (error as Error).message;
-    console.error("Error signing in with email:", errorMessage);
+    // console.error("Error signing in with email:", errorMessage);
     return false;
   }
 };
@@ -82,11 +82,11 @@ export const addProduct = async (
       });
     }
 
-    console.log("Successfully Sent!");
+    // console.log("Successfully Sent!");
 
     return true;
   } catch (e) {
-    console.error("Error adding document: ", e);
+    // console.error("Error adding document: ", e);
     return false;
   }
 };

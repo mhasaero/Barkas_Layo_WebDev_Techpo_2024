@@ -40,7 +40,7 @@ export default function SearchBar() {
       <PopoverTrigger>
         <Search className="size-6 duration-200 hover:text-primary xl:size-8" />
       </PopoverTrigger>
-      <PopoverContent className="mt-10">
+      <PopoverContent className="md: ms-10 mt-10">
         <div className="flex w-full max-w-sm items-center space-x-2">
           <Input
             type="text"

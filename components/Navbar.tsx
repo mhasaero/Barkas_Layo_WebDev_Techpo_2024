@@ -116,9 +116,7 @@ export default function Navbar({ type }: Props) {
                   </li>
                 ))}
                 <li>
-                  <Link href={"/favorites"}>
-                    <Search className="size-6 duration-200 hover:text-primary xl:size-8" />
-                  </Link>
+                  <SearchBar />
                 </li>
                 {user ? (
                   <li>

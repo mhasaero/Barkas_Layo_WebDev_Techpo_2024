@@ -1,7 +1,15 @@
 "use client";
 
 import { auth, db } from "@/lib/firebase";
-import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
@@ -17,7 +25,6 @@ export default function ProductContextProvider({ children }: any) {
   const [likedProducts, setLikedProducts] = useState<any>([]);
   const [sellersName, setSellersName] = useState<any>([]);
   const { uid } = useAuth();
-
 
   // get product global
   const getProducts = async () => {
@@ -54,50 +61,49 @@ export default function ProductContextProvider({ children }: any) {
   };
 
   //add liked product
-  const addLikedProduct = async ( product : any) => {
+  const addLikedProduct = async (product: any) => {
     let Product;
     Product = product;
     Product["liked"] = true;
 
     await setDoc(doc(db, `liked${uid}`, Product.id), Product);
-  }
+  };
 
   //get liked product
   const getLikedProduct = () => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          if (uid) {
-            const q = query(collection(db, `liked${uid}`));
-            const unsub = onSnapshot(q, (querySnapshot) => {  
-              const Product : any = [];
-              querySnapshot.forEach((doc) => { 
-                Product.push({ ...doc.data(), id: doc.id });
-              });
-              setLikedProducts(Product); 
-            })
-            console.log('success!');
-            return () => unsub;  
-          } else {
-            setLikedProducts([]);
-          }
-          resolve(likedProducts);
-        } catch (err) {
-          reject(`Error fetching products: ${err}`);
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (uid) {
+          const q = query(collection(db, `liked${uid}`));
+          const unsub = onSnapshot(q, (querySnapshot) => {
+            const Product: any = [];
+            querySnapshot.forEach((doc) => {
+              Product.push({ ...doc.data(), id: doc.id });
+            });
+            setLikedProducts(Product);
+          });
+          return () => unsub;
+        } else {
+          setLikedProducts([]);
         }
-      });
-  }
+        resolve(likedProducts);
+      } catch (err) {
+        reject(`Error fetching products: ${err}`);
+      }
+    });
+  };
 
   //check if product liked by user
-  const isProductLiked = async (productId : any) => {
+  const isProductLiked = async (productId: any) => {
     const productRef = doc(db, `liked${uid}`, `${productId}`);
     const docSnap = await getDoc(productRef);
     return docSnap.exists();
-  }
+  };
 
   useEffect(() => {
     getProducts();
   }, []);
-  
+
   useEffect(() => {
     if (products.length > 0) {
       getSellerName();
@@ -106,10 +112,15 @@ export default function ProductContextProvider({ children }: any) {
 
   useEffect(() => {
     getLikedProduct();
-    console.log(uid);
   }, [uid]);
 
-  const value = { products, sellersName, addLikedProduct, likedProducts, isProductLiked };
+  const value = {
+    products,
+    sellersName,
+    addLikedProduct,
+    likedProducts,
+    isProductLiked,
+  };
 
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
