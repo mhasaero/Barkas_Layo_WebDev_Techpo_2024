@@ -16,12 +16,14 @@ import {
 import SearchBar from "./SearchBar";
 
 import { useAuth } from "@/context/AuthContext";
+import { useProduct } from "@/context/ProductContext";
 
 type Props = {
   type?: boolean;
 };
 
 export default function Navbar({ type }: Props) {
+  const { likedProducts } = useProduct();
   const pathname = usePathname();
   const { user } = useAuth();
 
@@ -63,11 +65,21 @@ export default function Navbar({ type }: Props) {
             <SearchBar />
           </li>
           {user ? (
-            <li>
-              <Link href={"/favorites"}>
-                <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
-              </Link>
-            </li>
+            <>
+              <li className="relative">
+                <Link href={"/favorites"}>
+                  <Heart className="size-6 duration-200 hover:text-primary xl:size-8" />
+                </Link>
+                <div
+                  className={cn(
+                    "absolute -right-1 top-0 rounded-full bg-primary px-[6px] text-sm text-white",
+                    likedProducts.length > 0 ? "block" : "hidden",
+                  )}
+                >
+                  {likedProducts.length}
+                </div>
+              </li>
+            </>
           ) : (
             <li>
               <Link href={"/login"}>
